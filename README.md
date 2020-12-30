@@ -52,7 +52,7 @@ Web 2020 course project
 			]
 		}
 	```
-8. Submit test 
+8. Submit test
   - JSON request
   	```
   		{
@@ -78,14 +78,14 @@ Web 2020 course project
 			topic_number: ..,
 			topic_name: ..,
 			questions: [
-				{			
+				{
 					"question_text": "How many legs does a human have?"
 					"answ_1": 1,
 					"answ_2": 2,
 					"answ_3": 11,
 					"answ_4": 0,
 					"selected": "answ_1"
-					"is_correct": false			
+					"is_correct": false
 				},
 				{},
 				{},
@@ -93,6 +93,23 @@ Web 2020 course project
 			"score": 9
 		}
 	```
+
+
+
+### Contributions
+
+1. Vladi
+  - Комуникация с Милен (тестови данни, изисквания, etc.)
+	- Създаде Topic таблица
+	- Начален прототип
+	- Участва в изчистване на модела на базата
+2. Mitko
+	- Участва в изчистване на модела на базата
+3. Georgi
+	- Демо на phpMyAdmin за основни интеракции с базата
+	- feed и изчистване на тестовите данни
+	- Участва в изчистване на модела на базата
+
 
 
 
