@@ -94,7 +94,9 @@ Web 2020 course project
 		}
 	```
 
+ЛИНК КЪМ ТЕСТОВОТО REPOSITORY:
 
+https://github.com/vladimarkova/mypoetry
 
 ### Contributions
 
