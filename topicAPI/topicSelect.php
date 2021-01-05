@@ -29,23 +29,19 @@
                 $connection = new PDO("mysql:host=$host;dbname=$dbname", $user, $password, 
                 array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
 
-                $sql = "SELECT * FROM topic";
+                $sql = "SELECT * FROM topic WHERE topicNumber=$topicNumber";
                 $result = $connection->query($sql);
 
-                $found = false;
-                while(($row = $result->fetch(PDO::FETCH_ASSOC)) && !$found) {
-                    if ($row['topicNumber'] == $topicNumber) {
-                        $topicTitle = $row['title'];
-                        $extraInfo = $row['extraInfo'];
-                        $found = true;
-                        $message = "Избрахте тема със заглавие $topicTitle! Нейният номер е: $topicNumber и е с допълнителна информация $extraInfo";
-                        $response = ["success" => true, "message" => $message];
-                    }
-                }
+                $topic = $result->fetch(PDO::FETCH_ASSOC);
 
-                if (!$found) {
+                if (!$topic) {
                     $message = "Тема с номер $topicNumber не съществува! Моля опитайте отново!";
                     $response = ["success" => false, "message" => $message];
+                } else {
+                    $topicTitle = $topic['title'];
+                    $extraInfo = $topic['extraInfo'];
+                    $message = "Избрахте тема със заглавие $topicTitle! Нейният номер е: $topicNumber и е с допълнителна информация $extraInfo";
+                    $response = ["success" => true, "message" => $message];
                 }
             }
             catch(PDOException $e) {
