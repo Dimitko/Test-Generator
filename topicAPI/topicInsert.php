@@ -23,11 +23,11 @@
         $extraInfo = isset($data["extraInfo"]) ? $data["extraInfo"] : " ";
 
         if (!$title) {
-            $response = ["success" => false, "message" => "Title is required!"];
+            $response = ["success" => false, "message" => "Заглавието на тема е задължително поле!"];
         }
 
         if (!$topicNumber) {
-            $response = ["success" => false, "message" => "Topic number is required!"];
+            $response = ["success" => false, "message" => "Номерът на тема е задължително поле!"];
         }
 
         if ($title && $topicNumber) {
@@ -50,7 +50,7 @@
                     if ($row['title'] === $title) {
                         $existingTopicNumber = $row['topicNumber'];
                         $found = true;
-                        $message = "Topic already exists! With topic number: $existingTopicNumber";
+                        $message = "Тема с това заглавие вече съществува! Нейният номер е: $existingTopicNumber";
                         $response = ["success" => false, "message" => $message];
                     }
                 }
@@ -61,7 +61,7 @@
 
                     try {
                         $insertTopicStatement->execute(["title" => $title, "topicNumber" => $topicNumber, "extraInfo" => $extraInfo]);
-                        $message = 'You successfully inserted topic' . ' ' . $title . ' with topic number' . $topicNumber . ' and extra info: ' . $extraInfo;
+                        $message = 'Успешно добавихте тема със заглавие' . ' ' . $title . ' с номер' . $topicNumber . ' и допълнителна информация: ' . $extraInfo;
                         $response = ["success" => true, "message" => $message];
                     } catch(PDOException $e) {
                         $message = $e->getMessage();
@@ -77,3 +77,4 @@
         
         echo json_encode($response);
     }
+?>
