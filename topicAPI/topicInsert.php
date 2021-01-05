@@ -2,12 +2,16 @@
 
     header("Content-type: application/json");
 
+    $requestURL = $_SERVER["REQUEST_URI"];
+
     // if(preg_match("/topicInsert$/", $requestURL)) {
-    topicInsert();
+    //     topicInsert();
     // } else {
     //     echo json_encode(["error" => "URL адресът не е намерен"]);
     // }
-
+    
+    topicInsert(); 
+     
     function topicInsert() {
         $incomingContentType = $_SERVER['CONTENT_TYPE'];
         if ($incomingContentType != 'application/json') {
@@ -55,7 +59,7 @@
                     }
                 }
 
-                if (!$found) {
+               if (!$found) {
                     $sql = "INSERT INTO topic(title, topicNumber, extraInfo) VALUES (:title, :topicNumber, :extraInfo)";
                     $insertTopicStatement = $connection->prepare($sql);
 
@@ -67,7 +71,7 @@
                         $message = $e->getMessage();
                         $response = ["success" => false, "message" => $message];
                     }
-                } 
+               } 
             }
             catch(PDOException $e) {
                 $message = $e->getMessage();
