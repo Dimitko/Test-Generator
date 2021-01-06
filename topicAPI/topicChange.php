@@ -25,19 +25,23 @@
         $content = trim(file_get_contents("php://input"));
         $data = json_decode($content, true);
 
-        $oldTopicNumber = isset($data["oldTopicNumber"]) ? $data["oldTopicNumber"] : "";
+        $topicID = isset($data["topicID"]) ? $data["topicID"] : "";
         $topicTitle = isset($data["topicTitle"]) ? $data["topicTitle"] : "";
         $topicNumber = isset($data["topicNumber"]) ? $data["topicNumber"] : "";
         $extraInfo = isset($data["extraInfo"]) ? $data["extraInfo"] : "";
 
+        if (!$topicID) {
+            $response = ["success" => false, "message" => "Липсва ID на темата!"];
+        } 
+
         if (!$topicTitle) {
             $response = ["success" => false, "message" => "Няма въведено заглавие на тема!"];
         } 
-        if (!$topicTitle) {
+        if (!$topicNumber) {
             $response = ["success" => false, "message" => "Няма въведен номер на тема!"];
         }
         
-        if ($topicTitle && $topicTitle) {
+        if ($topicID && $topicTitle && $topicTitle) {
             $config = parse_ini_file("../config/config.ini", true);
 
             $host = $config['db']['host'];
@@ -49,59 +53,48 @@
                 $connection = new PDO("mysql:host=$host;dbname=$dbname", $user, $password, 
                 array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
 
-                $sql = "SELECT topicID FROM topic WHERE topicNumber=$oldTopicNumber";
-                $result = $connection->query($sql);
+                $sql = "UPDATE topic SET title=:title WHERE topicID=:topicID";
+                $statement = $connection->prepare($sql);
+                $query = $statement->execute(["title" => $topicTitle, "topicID" => $topicID]);
 
-                $topic = $result->fetch(PDO::FETCH_ASSOC);
                 $all_correct = true;
-
-                if ($topic) {
-                    $topicID = $topic['topicID'];
-                    $sql = "UPDATE topic SET title=:title WHERE topicID=:topicID";
-                    $statement = $connection->prepare($sql);
-                    $query = $statement->execute(["title" => $topicTitle, "topicID" => $topicID]);
-
-                    $messages = array();
-                    if ($query) {
-                        $message = 'Заглавие: ' . $topicTitle;
-                        array_push($messages, $message);
-                    } else {
-                        $all_correct = false;
-                        $message = "Възникна грешка в изпълнението на завяката Промяна на име!";
-                        $response = ["success" => false, "message" => $message];
-                    }
-
-                    $sql = "UPDATE topic SET topicNumber=:topicNumber WHERE topicID=:topicID";
-                    $statement = $connection->prepare($sql);
-                    $query = $statement->execute(["topicNumber" => $topicNumber, "topicID" => $topicID]);
-
-                    if ($query) {
-                        $message = 'Номер: ' . $topicNumber;
-                        array_push($messages, $message);
-                    } else {
-                        $all_correct = false;
-                        $message = "Възникна грешка в изпълнението на завяката Промяна на номер!";
-                        $response = ["success" => false, "message" => $message];
-                    }
-
-                    $sql = "UPDATE topic SET extraInfo=:extraInfo WHERE topicID=:topicID";
-                    $statement = $connection->prepare($sql);
-                    $query = $statement->execute(["extraInfo" => $extraInfo, "topicID" => $topicID]);
-
-                    if ($query) {
-                        $message = 'Допълнителна информация: ' . $extraInfo;
-                        array_push($messages, $message);
-                    } else {
-                        $all_correct = false;
-                        $message = "Възникна грешка в изпълнението на завяката Промяна на заглавие!";
-                        $response = ["success" => false, "message" => $message];
-                    }
-                    if ($all_correct) {
-                        $response = ["success" => true, "message" => $messages];
-                    }
+                $messages = array();
+                if ($query) {
+                    $message = 'Заглавие: ' . $topicTitle;
+                    array_push($messages, $message);
                 } else {
-                    $message = "Възникна грешка в изпълнението на завяката Намиране на ID!";
+                    $all_correct = false;
+                    $message = "Възникна грешка в изпълнението на завяката Промяна на име!";
                     $response = ["success" => false, "message" => $message];
+                }
+
+                $sql = "UPDATE topic SET topicNumber=:topicNumber WHERE topicID=:topicID";
+                $statement = $connection->prepare($sql);
+                $query = $statement->execute(["topicNumber" => $topicNumber, "topicID" => $topicID]);
+
+                if ($query) {
+                    $message = 'Номер: ' . $topicNumber;
+                    array_push($messages, $message);
+                } else {
+                    $all_correct = false;
+                    $message = "Възникна грешка в изпълнението на завяката Промяна на номер!";
+                    $response = ["success" => false, "message" => $message];
+                }
+
+                $sql = "UPDATE topic SET extraInfo=:extraInfo WHERE topicID=:topicID";
+                $statement = $connection->prepare($sql);
+                $query = $statement->execute(["extraInfo" => $extraInfo, "topicID" => $topicID]);
+
+                if ($query) {
+                    $message = 'Допълнителна информация: ' . $extraInfo;
+                    array_push($messages, $message);
+                } else {
+                    $all_correct = false;
+                    $message = "Възникна грешка в изпълнението на завяката Промяна на заглавие!";
+                    $response = ["success" => false, "message" => $message];
+                }
+                if ($all_correct) {
+                    $response = ["success" => true, "message" => $messages];
                 }
             }
             catch(PDOException $e) {
