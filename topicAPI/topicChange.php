@@ -103,21 +103,6 @@
                     $message = "Възникна грешка в изпълнението на завяката Намиране на ID!";
                     $response = ["success" => false, "message" => $message];
                 }
-
-                // $sql = "UPDATE topic SET title=:title WHERE topicNumber=:topicNumber";
-                // $statement = $connection->prepare($sql);
-                // $query = $statement->execute(["title" => $newTopicTitle, "topicNumber" => $oldTopicNumber]);
-
-                // $sql = "UPDATE topic SET topicNumber=:topicNumber WHERE title=:title";
-                // $statement = $connection->prepare($sql);
-                // $query = $statement->execute(["topicNumber" => $newTopicNumber, "title" => $newTopicTitle]);
-                // if ($query) {
-                //     $message = 'Заглавие ' . $newTopicTitle . ' номер ' . $newTopicNumber;
-                //     $response = ["success" => true, "message" => $message];
-                // } else {
-                //     $message = "Възникна грешка в изпълнението на завяката!";
-                //     $response = ["success" => false, "message" => $message];
-                // }
             }
             catch(PDOException $e) {
                 $message = $e->getMessage();
