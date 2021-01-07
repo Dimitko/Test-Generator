@@ -30,7 +30,7 @@
         if (!$topicNumber) {
             $response = ["success" => false, "message" => "Номерът на тема е задължително поле!"];
         } else {
-            $config = parse_ini_file("../config/config.ini", true);
+            $config = parse_ini_file("../../config/config.ini", true);
 
             $host = $config['db']['host'];
             $dbname = $config['db']['name'];
@@ -38,7 +38,7 @@
             $password = $config['db']['password'];
 
             try {
-                $connection = new PDO("mysql:host=$host;dbname=$dbname", $user, $password, 
+                $connection = new PDO("mysql:host=$host;dbname=$dbname", $user, $password,
                 array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
 
                 $sql = "SELECT * FROM topic WHERE topicNumber=$topicNumber";
@@ -60,7 +60,7 @@
                 $message = $e->getMessage();
                 $response = ["success" => false, "message" => $message];
             }
-         } 
+         }
         echo json_encode($response);
     }
 
@@ -79,7 +79,7 @@
         if (!$topicID) {
             $response = ["success" => false, "message" => "ID на тема е задължително поле!"];
         } else {
-            $config = parse_ini_file("../config/config.ini", true);
+            $config = parse_ini_file("../../config/config.ini", true);
 
             $host = $config['db']['host'];
             $dbname = $config['db']['name'];
@@ -87,7 +87,7 @@
             $password = $config['db']['password'];
 
             try {
-                $connection = new PDO("mysql:host=$host;dbname=$dbname", $user, $password, 
+                $connection = new PDO("mysql:host=$host;dbname=$dbname", $user, $password,
                 array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
 
                 $sql = "SELECT * FROM topic WHERE topicID=$topicID";
@@ -106,12 +106,12 @@
                 $message = $e->getMessage();
                 $response = ["success" => false, "message" => $message];
             }
-         } 
+         }
         echo json_encode($response);
     }
 
     function selectAll() {
-        $config = parse_ini_file("../config/config.ini", true);
+        $config = parse_ini_file("../../config/config.ini", true);
 
         $host = $config['db']['host'];
         $dbname = $config['db']['name'];
@@ -119,7 +119,7 @@
         $password = $config['db']['password'];
 
         try {
-            $connection = new PDO("mysql:host=$host;dbname=$dbname", $user, $password, 
+            $connection = new PDO("mysql:host=$host;dbname=$dbname", $user, $password,
             array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
 
             $sql = "SELECT * FROM topic";
@@ -133,7 +133,7 @@
             $response = ["success" => false, "message" => $message];
         }
         echo json_encode($response);
-     } 
+     }
 
     function topicSelectByTitle() {
         $incomingContentType = $_SERVER['CONTENT_TYPE'];
@@ -150,7 +150,7 @@
         if (!$topicTitle) {
             $response = ["success" => false, "message" => "Заглавието на тема е задължително поле!"];
         } else {
-            $config = parse_ini_file("../config/config.ini", true);
+            $config = parse_ini_file("../../config/config.ini", true);
 
             $host = $config['db']['host'];
             $dbname = $config['db']['name'];
@@ -158,12 +158,12 @@
             $password = $config['db']['password'];
 
             try {
-                $connection = new PDO("mysql:host=$host;dbname=$dbname", $user, $password, 
+                $connection = new PDO("mysql:host=$host;dbname=$dbname", $user, $password,
                 array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
 
                 $sql = "SELECT * FROM topic WHERE title='?'";
                 $result = $connection->query($sql);
-    
+
                 $found = false;
                 $countTopics = 0;
                 $topics = array();
@@ -189,7 +189,7 @@
                 $message = $e->getMessage();
                 $response = ["success" => false, "message" => $message];
             }
-         } 
+         }
         echo json_encode($response);
     }
 ?>

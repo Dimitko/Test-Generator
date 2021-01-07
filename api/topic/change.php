@@ -12,7 +12,7 @@
     // } else {
     //     echo json_encode(["error" => "URL адресът не е намерен"]);
     // }
-    
+
     topicChange();
 
     function topicChange() {
@@ -32,17 +32,17 @@
 
         if (!$topicID) {
             $response = ["success" => false, "message" => "Липсва ID на темата!"];
-        } 
+        }
 
         if (!$topicTitle) {
             $response = ["success" => false, "message" => "Няма въведено заглавие на тема!"];
-        } 
+        }
         if (!$topicNumber) {
             $response = ["success" => false, "message" => "Няма въведен номер на тема!"];
         }
-        
+
         if ($topicID && $topicTitle && $topicTitle) {
-            $config = parse_ini_file("../config/config.ini", true);
+            $config = parse_ini_file("../../config/config.ini", true);
 
             $host = $config['db']['host'];
             $dbname = $config['db']['name'];
@@ -50,7 +50,7 @@
             $password = $config['db']['password'];
 
             try {
-                $connection = new PDO("mysql:host=$host;dbname=$dbname", $user, $password, 
+                $connection = new PDO("mysql:host=$host;dbname=$dbname", $user, $password,
                 array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
 
                 $sql = "UPDATE topic SET title=:title WHERE topicID=:topicID";
@@ -101,7 +101,7 @@
                 $message = $e->getMessage();
                 $response = ["success" => false, "message" => $message];
             }
-         } 
+         }
         echo json_encode($response);
     }
 

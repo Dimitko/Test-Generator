@@ -3,59 +3,19 @@
 
     $requestURL = $_SERVER["REQUEST_URI"];
 
-    handleSubmitTest();
+    handleMakeTest();
 
-    function handleSubmitTest() {
+    function handleMakeTest() {
         $incomingContentType = $_SERVER['CONTENT_TYPE'];
         if ($incomingContentType != 'application/json') {
             header($_SERVER['SERVER_PROTOCOL'] . ' 500 INTERNAL SERVER ERROR ');
             exit();
         }
 
-        $test_result = assessTest();
+        $questions = makeTest();
+        $response = buildTestWithQuestion($questions);
 
-
-        echo json_encode($test_result);
-    }
-
-    function assessTest() {
-      $content = trim(file_get_contents("php://input"));
-      $test = json_decode($content, true);
-
-      foreach ($test as &$question) {
-        $correct = assessQuestion($question);
-        $question["result"] = $correct ? "correct" : "incorrect";
-      }
-
-      return $test;
-    }
-
-    function assessQuestion($question) {
-      $id = $question["id"];
-
-      $config = parse_ini_file("../config/config.ini", true);
-
-      $host = $config['db']['host'];
-      $dbname = $config['db']['name'];
-      $user = $config['db']['user'];
-      $password = $config['db']['password'];
-
-      $connection = new PDO("mysql:host=$host;dbname=$dbname", $user, $password,
-      array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
-
-      $ans_nr = 1;
-      $ans_col = "option_$ans_nr";
-
-
-      $sql = "SELECT `$ans_col` from question WHERE `id`=$id";
-      $result = $connection->query($sql);
-      $correct_answer_text = $result->fetch(PDO::FETCH_ASSOC)[$ans_col];
-      $selected_answer_text =  $question[$question["answer"]];
-
-
-      $is_correct = $correct_answer_text === $selected_answer_text;
-
-      return $is_correct;
+        echo json_encode($response);
     }
 
     function makeTest() {
@@ -70,7 +30,7 @@
             return $response;
         }
 
-        $config = parse_ini_file("../config/config.ini", true);
+        $config = parse_ini_file("../../config/config.ini", true);
 
         $host = $config['db']['host'];
         $dbname = $config['db']['name'];
@@ -136,7 +96,7 @@
         foreach ($questions as &$q) {
             $nq = [
                 "question_text" => $q["question_text"],
-                "question_id" => $q["id"],
+                "id" => $q["id"],
                 "option_1" => $q["option_1"],
                 "option_2" => $q["option_2"],
                 "option_3" => $q["option_3"],
@@ -147,3 +107,5 @@
         }
         return $result;
     }
+
+?>

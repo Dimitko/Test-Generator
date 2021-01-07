@@ -115,6 +115,9 @@ https://github.com/vladimarkova/mypoetry
 
 
 ### Backlog
+1. Find a way to improve/simplify the 'Test-Generatr' slug/url part.
+1. Create a file with constants
+1. Create a file with utility functions
 1. submitTest
 	При грешен отговор:
 		- да върне верния

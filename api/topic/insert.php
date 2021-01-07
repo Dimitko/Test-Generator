@@ -9,9 +9,9 @@
     // } else {
     //     echo json_encode(["error" => "URL адресът не е намерен"]);
     // }
-    
-    topicInsert(); 
-     
+
+    topicInsert();
+
     function topicInsert() {
         $incomingContentType = $_SERVER['CONTENT_TYPE'];
         if ($incomingContentType != 'application/json') {
@@ -35,7 +35,7 @@
         }
 
         if ($title && $topicNumber) {
-            $config = parse_ini_file("../config/config.ini", true);
+            $config = parse_ini_file("../../config/config.ini", true);
 
             $host = $config['db']['host'];
             $dbname = $config['db']['name'];
@@ -43,7 +43,7 @@
             $password = $config['db']['password'];
 
             try {
-                $connection = new PDO("mysql:host=$host;dbname=$dbname", $user, $password, 
+                $connection = new PDO("mysql:host=$host;dbname=$dbname", $user, $password,
                 array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
 
                 $sql = "SELECT * FROM topic";
@@ -71,14 +71,14 @@
                         $message = $e->getMessage();
                         $response = ["success" => false, "message" => $message];
                     }
-               } 
+               }
             }
             catch(PDOException $e) {
                 $message = $e->getMessage();
                 $response = ["success" => false, "message" => $message];
             }
-         } 
-        
+         }
+
         echo json_encode($response);
     }
 ?>
