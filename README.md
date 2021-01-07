@@ -114,6 +114,21 @@ https://github.com/vladimarkova/mypoetry
 
 
 
+### Backlog
+1. submitTest
+	При грешен отговор:
+		- да върне верния
+		- да даде feedback
+	При верен отговор:
+	  - да даде feedback
+1. buildTestWithQuestion - да разбърква отговорите на въпросите
+1. buildTestWithQeustions - да взима само някакъв брой от въпроси
+2. makeTest - да приема аргумент за броя на въпросите за теста
+1. Рефакториране на основните функции да връщат стойност, а само една външна да прави echo
+2. SQL select by title for topic (използваме ? за заглавието)
+3. Otdelna funkciq za connectvane kam bazata
+
+
 
 
 
