@@ -113,6 +113,16 @@ https://github.com/vladimarkova/mypoetry
 	- Участва в изчистване на модела на базата
 
 
+### Tasks
+
+1. Mitko
+	- Submit question
+	- Get question
+	- Get all questions for topic (+ vernite otgovori)
+	- Think about History model in the DB
+
+
+
 
 ### Backlog
 1. Find a way to improve/simplify the 'Test-Generatr' slug/url part.
