@@ -125,6 +125,8 @@ https://github.com/vladimarkova/mypoetry
 
 
 ### Backlog
+1. Error handling for unexisting topic
+5. Incoming content type != application/json should not result in an internal server error - it's a client error
 1. Find a way to improve/simplify the 'Test-Generatr' slug/url part.
 1. Create a file with constants
 1. Create a file with utility functions
@@ -140,6 +142,8 @@ https://github.com/vladimarkova/mypoetry
 1. Рефакториране на основните функции да връщат стойност, а само една външна да прави echo
 2. SQL select by title for topic (използваме ? за заглавието)
 3. Otdelna funkciq za connectvane kam bazata
+4. UNit tests/Automated Tests for PHP?
+
 
 
 

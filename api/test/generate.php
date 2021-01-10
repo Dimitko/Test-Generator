@@ -1,4 +1,6 @@
 <?php
+    require("../../src/utils.php");
+
     header("Content-type: application/json");
 
     $requestURL = $_SERVER["REQUEST_URI"];
@@ -30,61 +32,22 @@
             return $response;
         }
 
-        $config = parse_ini_file("../../config/config.ini", true);
-
-        $host = $config['db']['host'];
-        $dbname = $config['db']['name'];
-        $user = $config['db']['user'];
-        $password = $config['db']['password'];
-
         $topic_id = "";
+        $topic_id = executeDBQuery("SELECT topicID FROM topic WHERE topicNumber=$topicNumber")[0]["topicID"];
 
-        try {
-            $connection = new PDO("mysql:host=$host;dbname=$dbname", $user, $password,
-            array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
-
-
-
-            $sql = "SELECT topicID FROM topic WHERE topicNumber=$topicNumber";
-            $result = $connection->query($sql);
-
-            $topic_id = $result->fetch(PDO::FETCH_ASSOC)["topicID"];
-
-            if ($topic_id === NULL) {
-                $message = "Тема с номер $topicNumber не съществува! Моля опитайте отново!";
-                $response = ["success" => false, "message" => $message];
-                return $response;
-            }
-        }
-        catch(PDOException $e) {
-            $message = $e->getMessage();
+        if ($topic_id == NULL) {
+            $message = "Тема с номер $topicNumber не съществува! Моля опитайте отново!";
             $response = ["success" => false, "message" => $message];
             return $response;
         }
 
+        $questions = executeDBQuery("SELECT * FROM question WHERE topic_id=$topic_id");
 
-        try {
-            $connection = new PDO("mysql:host=$host;dbname=$dbname", $user, $password,
-            array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
-
-
-            $sql = "SELECT * FROM question WHERE topic_id=$topic_id";
-            $result = $connection->query($sql);
-
-            $questions = $result->fetchAll(PDO::FETCH_ASSOC);
-
-            if (!$questions) {
-                $message = "Няма въпроси за тази тема";
-                $response = ["success" => false, "message" => $message];
-                return $response;
-            }
-        }
-        catch(PDOException $e) {
-            $message = $e->getMessage();
+        if (!$questions) {
+            $message = "Няма въпроси за тази тема";
             $response = ["success" => false, "message" => $message];
             return $response;
         }
-
 
         return $questions;
     }
