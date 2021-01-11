@@ -121,6 +121,17 @@ https://github.com/vladimarkova/mypoetry
 	- Get all questions for topic (+ vernite otgovori)
 	- Think about History model in the DB
 
+2. Georgi
+		submitTest
+		При грешен отговор:
+			- да върне верния
+			- да даде feedback
+		При верен отговор:
+			- да даде feedback
+	1. buildTestWithQuestion - да разбърква отговорите на въпросите
+	1. buildTestWithQeustions - да взима само някакъв брой от въпроси
+	2. makeTest - да приема аргумент за броя на въпросите за теста
+
 
 
 
@@ -131,15 +142,6 @@ https://github.com/vladimarkova/mypoetry
 1. Find a way to improve/simplify the 'Test-Generatr' slug/url part.
 1. Create a file with constants
 1. Create a file with utility functions
-1. submitTest
-	При грешен отговор:
-		- да върне верния
-		- да даде feedback
-	При верен отговор:
-	  - да даде feedback
-1. buildTestWithQuestion - да разбърква отговорите на въпросите
-1. buildTestWithQeustions - да взима само някакъв брой от въпроси
-2. makeTest - да приема аргумент за броя на въпросите за теста
 1. Рефакториране на основните функции да връщат стойност, а само една външна да прави echo
 2. SQL select by title for topic (използваме ? за заглавието)
 3. Otdelna funkciq za connectvane kam bazata
