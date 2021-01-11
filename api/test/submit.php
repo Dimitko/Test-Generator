@@ -8,22 +8,14 @@
     handleSubmitTest();
 
     function handleSubmitTest() {
-        $incomingContentType = $_SERVER['CONTENT_TYPE'];
-        if ($incomingContentType != 'application/json') {
-            header($_SERVER['SERVER_PROTOCOL'] . ' 500 INTERNAL SERVER ERROR ');
-            exit();
-        }
+        $request = parseRequest();
 
-        $test_result = assessTest();
-
+        $test_result = assessTest($request);
 
         echo json_encode($test_result);
     }
 
-    function assessTest() {
-      $content = trim(file_get_contents("php://input"));
-      $test = json_decode($content, true);
-
+    function assessTest($test) {
       foreach ($test as &$question) {
         $correct = assessQuestion($question);
         $question["result"] = $correct ? "correct" : "incorrect";
@@ -37,9 +29,11 @@
 
       $ans_nr = 1;
       $ans_col = "option_$ans_nr";
-      $correct_answer_text = executeDBQuery("SELECT `$ans_col` from question WHERE `id`=$id")[$ans_col];
+
+      $correct_answer_text = executeDBQuery("SELECT `$ans_col` from question WHERE `id`=$id")[0][$ans_col];
 
       $selected_answer_text =  $question[$question["answer"]];
+
 
       $is_correct = $correct_answer_text === $selected_answer_text;
 

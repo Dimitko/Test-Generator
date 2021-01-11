@@ -125,6 +125,7 @@ https://github.com/vladimarkova/mypoetry
 
 
 ### Backlog
+1. Allow only requests for api/ folder
 1. Error handling for unexisting topic
 5. Incoming content type != application/json should not result in an internal server error - it's a client error
 1. Find a way to improve/simplify the 'Test-Generatr' slug/url part.

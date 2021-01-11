@@ -8,26 +8,17 @@
     handleMakeTest();
 
     function handleMakeTest() {
-        $incomingContentType = $_SERVER['CONTENT_TYPE'];
-        if ($incomingContentType != 'application/json') {
-            header($_SERVER['SERVER_PROTOCOL'] . ' 500 INTERNAL SERVER ERROR ');
-            exit();
-        }
-
-        $questions = makeTest();
+        $request = parseRequest();
+        $questions = makeTest($request);
         $response = buildTestWithQuestion($questions);
 
         echo json_encode($response);
     }
 
-    function makeTest() {
-        $content = trim(file_get_contents("php://input"));
-        $data = json_decode($content, true);
-
-        $topicNumber = isset($data["topicNumber"]) ? $data["topicNumber"] : "";
+    function makeTest($request) {
+        $topicNumber = isset($request["topicNumber"]) ? $request["topicNumber"] : "";
 
         if ($topicNumber === "") {
-            echo gettype($topicNumber);
             $response = ["success" => false, "message" => "Номерът на тема е задължително поле!"];
             return $response;
         }
@@ -44,9 +35,7 @@
         $questions = executeDBQuery("SELECT * FROM question WHERE topic_id=$topic_id");
 
         if (!$questions) {
-            $message = "Няма въпроси за тази тема";
-            $response = ["success" => false, "message" => $message];
-            return $response;
+            return [];
         }
 
         return $questions;

@@ -27,4 +27,19 @@ function executeDBQuery($query)
   }
 }
 
+function parseRequest() {
+  $incomingContentType = $_SERVER['CONTENT_TYPE'];
+  if ($incomingContentType != 'application/json') {
+      header($_SERVER['SERVER_PROTOCOL'] . ' 500 INTERNAL SERVER ERROR ');
+      exit();
+  }
+
+  $content = trim(file_get_contents("php://input"));
+  $request = json_decode($content, true);
+
+  return $request;
+}
+
+
+
 ?>
