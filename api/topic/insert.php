@@ -1,18 +1,49 @@
 <?php
+    require("../../src/utils.php");
 
     header("Content-type: application/json");
 
     $requestURL = $_SERVER["REQUEST_URI"];
 
-    // if(preg_match("/topicInsert$/", $requestURL)) {
-    //     topicInsert();
-    // } else {
-    //     echo json_encode(["error" => "URL адресът не е намерен"]);
-    // }
+    handleTopicInsert();
 
-    topicInsert();
+    function handleTopicInsert() {
+        $request = parseRequest();
 
-    function topicInsert() {
+        $response = topicInsert($request);
+
+        echo json_encode($response);
+    }
+
+    function topicInsert($request) {
+        $title = isset($request["title"]) ? $request["title"] : "";
+        $topicNumber = isset($request["topicNumber"]) ? $request["topicNumber"] : "";
+        $extraInfo = isset($request["extraInfo"]) ? $request["extraInfo"] : " ";
+
+        if (!$title) {
+            $response = ["success" => false, "message" => "Заглавието на тема е задължително поле!"];
+            return $response;
+        }
+
+        if (!$topicNumber) {
+            $response = ["success" => false, "message" => "Номерът на тема е задължително поле!"];
+            return $response;
+        }
+        
+        $sql = "INSERT INTO topic(title, topicNumber, extraInfo) VALUES ('$title', '$topicNumber', '$extraInfo')";
+        $result = insertTopicQuery($sql);
+
+        if ($result) {
+            $message = 'Успешно добавихте тема със заглавие' . ' ' . $title . ' с номер' . $topicNumber . ' и допълнителна информация: ' . $extraInfo;
+            $response = ["success" => true, "message" => $message];
+            return $response;
+        } else {
+            $response = ["success" => false, "message" => "Възникна проблем с вписването на темата!"];
+            return $response;
+        }
+    }
+
+    function topicInsert1() {
         $incomingContentType = $_SERVER['CONTENT_TYPE'];
         if ($incomingContentType != 'application/json') {
             header($_SERVER['SERVER_PROTOCOL'] . ' 500 INTERNAL SERVER ERROR ');
