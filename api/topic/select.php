@@ -1,195 +1,119 @@
 <?php
+    require("../../src/utils.php");
+
     header("Content-type: application/json");
 
     $requestURL = $_SERVER["REQUEST_URI"];
 
     if(preg_match("/byNumber$/", $requestURL)) {
-        topicSelectByNumber();
+        handleTopicSelectByNumber();
     } elseif(preg_match("/byTitle$/", $requestURL)) {
-        topicSelectByTitle();
+        handleTopicSelectByTitle();
     } elseif(preg_match("/byID$/", $requestURL)) {
-        topicSelectByID();
+        handleTopicSelectByID();
     } elseif(preg_match("/all$/", $requestURL)) {
-        selectAll();
+        handleTopicSelectAll();
     } else {
         echo json_encode(["error" => "URL адресът не е намерен"]);
     }
 
-    function topicSelectByNumber() {
-        $incomingContentType = $_SERVER['CONTENT_TYPE'];
-        if ($incomingContentType != 'application/json') {
-            header($_SERVER['SERVER_PROTOCOL'] . ' 500 INTERNAL SERVER ERROR ');
-            exit();
+    function handleTopicSelectAll() {
+        $response = topicSelectAll();
+
+        echo json_encode($response);
+    }
+
+    function handleTopicSelectByNumber() {
+        $request = parseRequest();
+
+        $response = topicSelectByNumber($request);
+
+        echo json_encode($response);
+    }
+
+    function handleTopicSelectByID() {
+        $request = parseRequest();
+
+        $response = topicSelectByID($request);
+
+        echo json_encode($response);
+    }
+
+    function handleTopicSelectByTitle() {
+        $request = parseRequest();
+
+        $response = topicSelectByTitle($request);
+
+        echo json_encode($response);
+    }
+
+
+    function topicSelectAll() {
+        $sql = "SELECT * FROM topic";
+        $result = executeDBQuery($sql);
+
+        if ($result) {
+            return $result;
+        } else {
+            $response = ["success" => false, "message" => "Възникна проблем!"];
+            return $response;
         }
+    }
 
-        $content = trim(file_get_contents("php://input"));
-        $data = json_decode($content, true);
-
-        $topicNumber = isset($data["topicNumber"]) ? $data["topicNumber"] : "";
+    function topicSelectByNumber($request) {
+        $topicNumber = isset($request["topicNumber"]) ? $request["topicNumber"] : "";
 
         if (!$topicNumber) {
             $response = ["success" => false, "message" => "Номерът на тема е задължително поле!"];
-        } else {
-            $config = parse_ini_file("../../config/config.ini", true);
-
-            $host = $config['db']['host'];
-            $dbname = $config['db']['name'];
-            $user = $config['db']['user'];
-            $password = $config['db']['password'];
-
-            try {
-                $connection = new PDO("mysql:host=$host;dbname=$dbname", $user, $password,
-                array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
-
-                $sql = "SELECT * FROM topic WHERE topicNumber=$topicNumber";
-                $result = $connection->query($sql);
-
-                $topic = $result->fetch(PDO::FETCH_ASSOC);
-
-                if (!$topic) {
-                    $message = "Тема с номер $topicNumber не съществува! Моля опитайте отново!";
-                    $response = ["success" => false, "message" => $message];
-                } else {
-                    $topicTitle = $topic['title'];
-                    $extraInfo = $topic['extraInfo'];
-                    $message = "Избрахте тема със заглавие $topicTitle! Нейният номер е: $topicNumber и е с допълнителна информация $extraInfo";
-                    $response = ["success" => true, "message" => $message];
-                }
-            }
-            catch(PDOException $e) {
-                $message = $e->getMessage();
-                $response = ["success" => false, "message" => $message];
-            }
-         }
-        echo json_encode($response);
-    }
-
-    function topicSelectByID() {
-        $incomingContentType = $_SERVER['CONTENT_TYPE'];
-        if ($incomingContentType != 'application/json') {
-            header($_SERVER['SERVER_PROTOCOL'] . ' 500 INTERNAL SERVER ERROR ');
-            exit();
+            return $response;
         }
 
-        $content = trim(file_get_contents("php://input"));
-        $data = json_decode($content, true);
+        $sql = "SELECT * FROM topic WHERE topicNumber=$topicNumber";
+        $result = executeDBQuery($sql);
 
-        $topicID = isset($data["topicID"]) ? $data["topicID"] : "";
+        if ($result) {
+            return $result;
+        } else {
+            $response = ["success" => false, "message" => "Възникна проблем!"];
+            return $response;
+        }
+    }
+
+    function topicSelectByID($request) {
+        $topicID = isset($request["topicID"]) ? $request["topicID"] : "";
 
         if (!$topicID) {
             $response = ["success" => false, "message" => "ID на тема е задължително поле!"];
+            return $response;
+        }
+
+        $sql = "SELECT * FROM topic WHERE topicID=$topicID";
+        $result = executeDBQuery($sql);
+
+        if ($result) {
+            return $result;
         } else {
-            $config = parse_ini_file("../../config/config.ini", true);
-
-            $host = $config['db']['host'];
-            $dbname = $config['db']['name'];
-            $user = $config['db']['user'];
-            $password = $config['db']['password'];
-
-            try {
-                $connection = new PDO("mysql:host=$host;dbname=$dbname", $user, $password,
-                array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
-
-                $sql = "SELECT * FROM topic WHERE topicID=$topicID";
-                $result = $connection->query($sql);
-
-                $topic = $result->fetch(PDO::FETCH_ASSOC);
-
-                if (!$topic) {
-                    $message = "Тема с ID $topicID не съществува! Моля опитайте отново!";
-                    $response = ["success" => false, "message" => $message];
-                } else {
-                    $response = ["success" => true, "message" => $topic];
-                }
-            }
-            catch(PDOException $e) {
-                $message = $e->getMessage();
-                $response = ["success" => false, "message" => $message];
-            }
-         }
-        echo json_encode($response);
+            $response = ["success" => false, "message" => "Възникна проблем!"];
+            return $response;
+        }
     }
 
-    function selectAll() {
-        $config = parse_ini_file("../../config/config.ini", true);
+    function topicSelectByTitle($request) {
+        $title = isset($request["title"]) ? $request["title"] : "";
 
-        $host = $config['db']['host'];
-        $dbname = $config['db']['name'];
-        $user = $config['db']['user'];
-        $password = $config['db']['password'];
-
-        try {
-            $connection = new PDO("mysql:host=$host;dbname=$dbname", $user, $password,
-            array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
-
-            $sql = "SELECT * FROM topic";
-            $result = $connection->query($sql);
-            $res = $result->fetchAll(PDO::FETCH_ASSOC);
-
-            $response = ["success" => true, "message" => $res];
-        }
-        catch(PDOException $e) {
-            $message = $e->getMessage();
-            $response = ["success" => false, "message" => $message];
-        }
-        echo json_encode($response);
-     }
-
-    function topicSelectByTitle() {
-        $incomingContentType = $_SERVER['CONTENT_TYPE'];
-        if ($incomingContentType != 'application/json') {
-            header($_SERVER['SERVER_PROTOCOL'] . ' 500 INTERNAL SERVER ERROR ');
-            exit();
-        }
-
-        $content = trim(file_get_contents("php://input"));
-        $data = json_decode($content, true);
-
-        $topicTitle = isset($data["title"]) ? $data["title"] : "";
-
-        if (!$topicTitle) {
+        if (!$title) {
             $response = ["success" => false, "message" => "Заглавието на тема е задължително поле!"];
+            return $response;
+        }
+
+        $sql = "SELECT * FROM topic WHERE title='$title'";
+        $result = executeDBQuery($sql);
+
+        if ($result) {
+            return $result;
         } else {
-            $config = parse_ini_file("../../config/config.ini", true);
-
-            $host = $config['db']['host'];
-            $dbname = $config['db']['name'];
-            $user = $config['db']['user'];
-            $password = $config['db']['password'];
-
-            try {
-                $connection = new PDO("mysql:host=$host;dbname=$dbname", $user, $password,
-                array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
-
-                $sql = "SELECT * FROM topic WHERE title='?'";
-                $result = $connection->query($sql);
-
-                $found = false;
-                $countTopics = 0;
-                $topics = array();
-                while($row = $result->fetch(PDO::FETCH_ASSOC)) {
-                    if ($row['title'] === $topicTitle) {
-                        $countTopics++;
-                        $topicNumber = $row['topicNumber'];
-                        $extraInfo = $row['extraInfo'];
-                        $found = true;
-                        $topic = ["title" => $topicTitle, "topicNumber" => $topicNumber, "extraInfo" => $extraInfo];
-                        array_push($topics, $topic);
-                    }
-                }
-
-                if (!$found) {
-                    $message = "Тема с това заглавие не съществува!";
-                    $response = ["success" => false, "message" => $message];
-                } else {
-                    $response = ["success" => true, "numberOfTopicsWithThisTitle" => $countTopics, "message" => $topics];
-                }
-           }
-            catch(PDOException $e) {
-                $message = $e->getMessage();
-                $response = ["success" => false, "message" => $message];
-            }
-         }
-        echo json_encode($response);
+            $response = ["success" => false, "message" => "Възникна проблем!"];
+            return $response;
+        }
     }
 ?>
