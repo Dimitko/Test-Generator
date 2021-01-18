@@ -24,7 +24,7 @@ function executeDBQuery($query) {
   }
 }
 
-function insertQuery($query) {
+function insertUpdateQuery($query) {
   $INI_FILE_DIR = realpath(__DIR__ . DIRECTORY_SEPARATOR . "../config/config.ini");
   $config = parse_ini_file($INI_FILE_DIR, true);
 

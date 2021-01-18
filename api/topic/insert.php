@@ -31,7 +31,7 @@
         }
         
         $sql = "INSERT INTO topic(title, topicNumber, extraInfo) VALUES ('$title', '$topicNumber', '$extraInfo')";
-        $result = insertQuery($sql);
+        $result = insertUpdateQuery($sql);
 
         if ($result) {
             $message = 'Успешно добавихте тема със заглавие' . ' ' . $title . ' с номер' . $topicNumber . ' и допълнителна информация: ' . $extraInfo;

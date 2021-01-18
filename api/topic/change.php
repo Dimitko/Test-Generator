@@ -1,4 +1,5 @@
 <?php
+    require("../../src/utils.php");
     header("Content-type: application/json");
 
     $requestURL = $_SERVER["REQUEST_URI"];
@@ -12,8 +13,42 @@
     // } else {
     //     echo json_encode(["error" => "URL адресът не е намерен"]);
     // }
+    
+    handleTopicChangeByNumber();
 
-    topicChange();
+    function handleTopicChangeByNumber() {
+        $request = parseRequest();
+
+        $response = topicChangeTitleByNumber($request);
+
+        echo json_encode($response);
+    }
+
+    function topicChangeTitleByNumber($request) {
+        $topicNumber = isset($request["topicNumber"]) ? $request["topicNumber"] : "";
+        $title = isset($request["title"]) ? $request["title"] : "";
+
+        if (!$topicNumber) {
+            $response = ["success" => false, "message" => "Номерът на тема е задължително поле!"];
+            return $response;
+        }
+
+        if (!$title) {
+            $response = ["success" => false, "message" => "Заглавието на тема е задължително поле!"];
+            return $response;
+        }
+
+        $sql = "UPDATE topic SET title='$title' WHERE topicNumber=$topicNumber";
+        $result = insertUpdateQuery($sql);
+
+        if ($result) {
+            $response = ["success" => true, "message" => "Успешно променихте заглавие на тема!"];
+            return $response;
+        } else {
+            $response = ["success" => false, "message" => "Възникна проблем!"];
+            return $response;
+        }
+    }
 
     function topicChange() {
         $incomingContentType = $_SERVER['CONTENT_TYPE'];
