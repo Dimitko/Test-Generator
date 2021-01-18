@@ -17,8 +17,14 @@
 
     function assessTest($test) {
       foreach ($test as &$question) {
-        $correct = assessQuestion($question);
-        $question["result"] = $correct ? "correct" : "incorrect";
+        $assessment = assessQuestion($question);
+
+        $question["result"] = $assessment["result"];
+        $question["feedback"] = $assessment["feedback"];
+
+        if (array_key_exists('correct_answer', $assessment)) {
+          $question["correct_answer"] = $assessment["correct_answer"];
+        }
       }
 
       return $test;
@@ -30,13 +36,23 @@
       $ans_nr = 1;
       $ans_col = "option_$ans_nr";
 
-      $correct_answer_text = executeDBQuery("SELECT `$ans_col` from question WHERE `id`=$id")[0][$ans_col];
+      $query_result = executeDBQuery("SELECT `$ans_col`, `feedback_correct`, `feedback_incorrect`  from question WHERE `id`=$id")[0];
+      $correct_answer_text = $query_result[$ans_col];
 
       $selected_answer_text =  $question[$question["answer"]];
 
-
       $is_correct = $correct_answer_text === $selected_answer_text;
+      $feedback = $is_correct ? $query_result["feedback_correct"] : $query_result["feedback_incorrect"];
 
-      return $is_correct;
+      $result = [
+        "result" => $is_correct,
+        "feedback" => $feedback,
+      ];
+
+      if (!$is_correct) {
+        $result["correct_answer"] =  $correct_answer_text;
+      }
+
+      return $result;
     }
 ?>

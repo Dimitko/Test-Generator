@@ -54,7 +54,8 @@ function insertTopicQuery($query) {
 function parseRequest() {
   $incomingContentType = $_SERVER['CONTENT_TYPE'];
   if ($incomingContentType != 'application/json') {
-      header($_SERVER['SERVER_PROTOCOL'] . ' 500 INTERNAL SERVER ERROR ');
+      header($_SERVER['SERVER_PROTOCOL'] . ' 400 Bad Request ');
+      echo "Request format must be json!";
       exit();
   }
 

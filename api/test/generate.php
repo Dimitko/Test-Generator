@@ -44,8 +44,12 @@
     function buildTestWithQuestion($questions)
     {
         $result = array();
-
+        $question_nr = 0;
         foreach ($questions as &$q) {
+            if ($question_nr == 10) {
+                break;
+            }
+
             $nq = [
                 "question_text" => $q["question_text"],
                 "id" => $q["id"],
@@ -56,6 +60,7 @@
             ];
 
             $result[] = $nq;
+            $question_nr += 1;
         }
         return $result;
     }

@@ -111,6 +111,9 @@ https://github.com/vladimarkova/mypoetry
 	- Демо на phpMyAdmin за основни интеракции с базата
 	- feed и изчистване на тестовите данни
 	- Участва в изчистване на модела на базата
+	- Раработва generate / submit test функционалността
+	- Тестване чрез Postman
+
 
 
 ### Tasks
@@ -124,13 +127,13 @@ https://github.com/vladimarkova/mypoetry
 2. Georgi
 		submitTest
 		При грешен отговор:
-			- да върне верния
-			- да даде feedback
+			- (/) да върне верния
+			- (/) да даде feedback
 		При верен отговор:
-			- да даде feedback
-	1. buildTestWithQuestion - да разбърква отговорите на въпросите
-	1. buildTestWithQeustions - да взима само някакъв брой от въпроси
-	2. makeTest - да приема аргумент за броя на въпросите за теста
+			- (/) да даде feedback
+	1. (X)buildTestWithQuestion - да разбърква отговорите на въпросите
+	1. (/) buildTestWithQeustions - да взима само някакъв брой от въпроси
+	2. (X) makeTest - да приема аргумент за броя на въпросите за теста
 
 
 
