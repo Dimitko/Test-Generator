@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta name="author" content="vmarkova"/>
+        <meta name="description" content="Form for topic choice"/>
+        <meta charset="utf-8" />
+
+        <link href="../styles/PageStyling.css" rel="stylesheet"></link>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href = "../images/smile.jpg" rel="icon" type="image/jpg">
+
+        <link href="../styles/FormStyling.css" rel="stylesheet"></link>
+
+        <div class="topnav">
+            <a class="active" href="../"><i class="fa fa-fw fa-home"></i> Smile</a>
+            <div class="dropdown">
+                <button class="dropbtn"><i class="fa fa-plus-square" aria-hidden="true"></i> Добавяне
+                <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-content">
+                <a href="TopicForm.html"><i class="fa fa-book" aria-hidden="true"></i> Добавяне на тема</a>
+                <a href=""><i class="fa fa-magic" aria-hidden="true"></i> Добавяне на въпроси</a>
+                </div>
+            </div>
+            <a href="#"><i class="fa fa-puzzle-piece" aria-hidden="true"></i> Започване на тест</a>
+            <a href="Conditions.php"><i class="fa fa-handshake-o" aria-hidden="true"></i> Общи условия</a>
+            <div class="topnav-right">
+                <a href="LoginForm.html">Вход <i class="fa fa-sign-in" aria-hidden="true"></i></a>
+                <div class="dropdown">
+                    <button class="dropbtn"><i class="fa fa-user-circle-o" aria-hidden="true"></i> Регистрация
+                    <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="dropdown-content">
+                    <a href="RegisterStudentsForm.html"><i class="fa fa-user-plus" aria-hidden="true"></i> Студенти</a>
+                    <a href="RegisterTeachersForm.html"><i class="fa fa-user-plus" aria-hidden="true"></i> Преподаватели</a>
+                    </div>
+                </div>
+            </div>
+        </div> 
+
+        <title>Добавяне на въпроси</title>
+        <body class="bodyclass">
+            <div class="form-style-2">
+                <div class="form-style-2-heading">Добавяне на въпрос</div>
+                <form action="my_test.php" method="post">
+                    <label for="topicNum"><span>Номер на тема</span><span class="required">*</span>
+                    <input id="topicNum" name="topicNum" type="text" class="input-field"  placeholder="Номер в Puffin" /></label> 
+                    
+                    <br />
+
+                    <label for="purpose"><span>Цел на въпроса</span><span class="required">*</span>
+                    <input id="purpose" name="purpose" type="text" class="input-field"/></label> 
+                    
+                    <br />
+
+                    <label for="type"><span>Тип на въпроса</span><span class="required">*</span>
+                    <select id="type" name="type" class="select-field">
+                    <option value="1">За предварителни знания (pre-question)</option>
+                    <option value="2">По време на презентацията (poll question)</option>
+                    <option value="3">След презентацията (test your knowledge)</option>
+                    </select>
+                    </label>
+
+                    <br />   
+
+                    <label for="difficulty"><span>Ниво на трудност</span><span class="required">*</span>
+                    <input id="difficulty" name="difficulty" type="text" class="input-field" placeholder="Число от 1 до 10"/></label> 
+
+                    <br />
+                    <br />
+
+                    <label for="extraInfo"><span>Съдържание</span><span class="required">*</span>
+                    <textarea id="extraInfo" name="extraInfo" class="textarea-field"></textarea></label>
+                    
+                    <br />
+                    <br />
+
+                    <label for="rightAnswer"><span>Опция 1</span><span class="required">*</span>
+                    <textarea id="rightAnswer" name="rightAnswer" class="textarea-field"></textarea></label>
+                    
+                    <br />
+                    <br />
+
+                    <label for="wrongAnswer1"><span>Опция 2</span><span class="required">*</span>
+                    <textarea id="wrongAnswer1" name="wrongAnswer1" class="textarea-field"></textarea></label>
+                    
+                    <br />
+                    <br />
+
+                    <label for="wrongAnswer2"><span>Опция 3</span><span class="required">*</span>
+                    <textarea id="wrongAnswer2" name="wrongAnswer2" class="textarea-field"></textarea></label>
+                    
+                    <br />
+                    <br />
+
+                    <label for="wrongAnswer3"><span>Опция 4</span><span class="required">*</span>
+                    <textarea id="wrongAnswer3" name="wrongAnswer3" class="textarea-field"></textarea></label>
+                    
+                    <br />
+                    <br />
+
+                    <label for="responseIfRight"><span>Обратна връзка при верен отговор</span><span class="required">*</span>
+                    <input id="responseIfRight" name="responseIfRight" type="text" class="input-field" placeholder="Отлично! Повече по темата в секция 4.3.
+                    "/></label> 
+                    
+                    <br />
+
+                    <label for="responseIfWrong"><span>Обратна връзка при грешен отговор</span><span class="required">*</span>
+                    <input id="responseIfWrong" name="responseIfWrong" type="text" class="input-field" placeholder="Не е така! Повече по темата в секция 4.3. 
+                    "/></label>
+
+                    <br />
+                    <br />
+
+                    <label for="extraInfo"><span>Забележки</span><span></span>
+                    <textarea id="extraInfo" name="extraInfo" class="textarea-field" placeholder="Линкове към източници, препратки, особености на въпроса" ></textarea></label>
+                    <br />
+                    <label><span></span><span></span><input id="Insert" type="submit" value="Запиши" ></input></label>      
+                </form>
+            </div>
+        </body>
+    </head>
+</html>
