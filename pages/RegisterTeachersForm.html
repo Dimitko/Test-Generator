@@ -12,65 +12,40 @@
 
         <link href="../styles/FormStyling.css" rel="stylesheet"></link>
 
-        <div class="topnav">
-            <a class="active" href="../"><i class="fa fa-fw fa-home"></i> Smile</a>
-            <div class="dropdown">
-                <button class="dropbtn"><i class="fa fa-plus-square" aria-hidden="true"></i> Добавяне
-                <i class="fa fa-caret-down"></i>
-                </button>
-                <div class="dropdown-content">
-                <a href="TopicForm.html"><i class="fa fa-book" aria-hidden="true"></i> Добавяне на тема</a>
-                <a href="QuestionForm.html"><i class="fa fa-magic" aria-hidden="true"></i> Добавяне на въпроси</a>
-                </div>
-            </div>
-            <a href="#"><i class="fa fa-puzzle-piece" aria-hidden="true"></i> Започване на тест</a>
-            <a href="Conditions.html"><i class="fa fa-handshake-o" aria-hidden="true"></i> Общи условия</a>
-            <div class="topnav-right">
-                <a href="LoginForm.html">Вход <i class="fa fa-sign-in" aria-hidden="true"></i></a>
-                <div class="dropdown">
-                    <button class="dropbtn"><i class="fa fa-user-circle-o" aria-hidden="true"></i> Регистрация
-                    <i class="fa fa-caret-down"></i>
-                    </button>
-                    <div class="dropdown-content">
-                    <a href="RegisterStudentsForm.html"><i class="fa fa-user-plus" aria-hidden="true"></i> Студенти</a>
-                    <a href=""><i class="fa fa-user-plus" aria-hidden="true"></i> Преподаватели</a>
-                    </div>
-                </div>
-            </div>
-        </div> 
-
+        <script type="text/javascript" src="/Test-Generator/scripts/navigation_bar.js" defer></script>
         <title>Регистрация</title>
-        <body class="bodyclass">
-            <div class="form-style-2">
-                <div class="form-style-2-heading">Регистрация</div>
-                <p><h2><strong>Общите условия може да прочетете <a href="Conditions.html">тук</a></strong></h2></p>
-                <br />
-                <form action="my_test.php" method="post">
-                    <label for="username"><span>Потребителско име</span><span class="required">*</span>
-                    <input id="username" name="username" type="text" class="input-field" placeholder="Въведете потребителско име" /></label> 
 
-                    <label for="password"><span>Парола</span><span class="required">*</span>
-                    <input id="password" name="password" type="text" class="input-field" placeholder="Въведете парола от минимум шест символа" /></label> 
-
-                    <label for="passwordRepeat"><span>Парола</span><span class="required">*</span>
-                    <input id="passwordRepeat" name="passwordRepeat" type="text" class="input-field" placeholder="Повторете парола" /></label> 
-
-                    <label for="name"><span>Три имена</span><span class="required">*</span>
-                    <input id="name" name="name" type="text" class="input-field" placeholder="Въведете три имена" /></label> 
-
-                    <label for="role"><span>Роля</span><span class="required">*</span>
-                        <select id="role" name="role" class="select-field">
-                        <option value="1">Лектор</option>
-                        <option value="2">Асистент</option>
-                        </select>
-                    </label>
-                    
-                    <label for="email"><span>E-mail</span><span class="required">*</span>
-                    <input id="email" name="email" type="email" class="input-field" placeholder="Въведете e-mail, който използвате" /></label>                   
-                    <br />
-                    <label><span></span><span></span><input id="Register" type="submit" value="Запиши" ></input></label>      
-                </form>
-            </div>
-        </body>
     </head>
+    <body class="bodyclass">
+        <div class="form-style-2">
+            <div class="form-style-2-heading">Регистрация</div>
+            <p><h2><strong>Общите условия може да прочетете <a href="Conditions.html">тук</a></strong></h2></p>
+            <br />
+            <form action="my_test.php" method="post">
+                <label for="username"><span>Потребителско име</span><span class="required">*</span>
+                <input id="username" name="username" type="text" class="input-field" placeholder="Въведете потребителско име" /></label>
+
+                <label for="password"><span>Парола</span><span class="required">*</span>
+                <input id="password" name="password" type="text" class="input-field" placeholder="Въведете парола от минимум шест символа" /></label>
+
+                <label for="passwordRepeat"><span>Парола</span><span class="required">*</span>
+                <input id="passwordRepeat" name="passwordRepeat" type="text" class="input-field" placeholder="Повторете парола" /></label>
+
+                <label for="name"><span>Три имена</span><span class="required">*</span>
+                <input id="name" name="name" type="text" class="input-field" placeholder="Въведете три имена" /></label>
+
+                <label for="role"><span>Роля</span><span class="required">*</span>
+                    <select id="role" name="role" class="select-field">
+                    <option value="1">Лектор</option>
+                    <option value="2">Асистент</option>
+                    </select>
+                </label>
+
+                <label for="email"><span>E-mail</span><span class="required">*</span>
+                <input id="email" name="email" type="email" class="input-field" placeholder="Въведете e-mail, който използвате" /></label>
+                <br />
+                <label><span></span><span></span><input id="Register" type="submit" value="Запиши" ></input></label>
+            </form>
+        </div>
+    </body>
 </html>
