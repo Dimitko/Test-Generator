@@ -29,12 +29,12 @@
             $response = ["success" => false, "message" => "Номерът на тема е задължително поле!"];
             return $response;
         }
-        
+
         $sql = "INSERT INTO topic(title, topicNumber, extraInfo) VALUES ('$title', '$topicNumber', '$extraInfo')";
         $result = insertUpdateQuery($sql);
 
         if ($result) {
-            $message = 'Успешно добавихте тема със заглавие' . ' ' . $title . ' с номер' . $topicNumber . ' и допълнителна информация: ' . $extraInfo;
+            $message = 'Успешно добавихте тема със заглавие' . ' ' . $title;
             $response = ["success" => true, "message" => $message];
             return $response;
         } else {

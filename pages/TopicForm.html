@@ -11,8 +11,9 @@
         <link href = "../images/smile.jpg" rel="icon" type="image/jpg">
 
         <link href="../styles/FormStyling.css" rel="stylesheet"></link>
+        <script type="text/javascript" src="../scripts/topic.js" defer></script>
 
-        <div class="topnav">
+      <div class="topnav">
             <a class="active" href="../"><i class="fa fa-fw fa-home"></i> Smile</a>
             <div class="dropdown">
                 <button class="dropbtn"><i class="fa fa-plus-square" aria-hidden="true"></i> Добавяне
@@ -37,25 +38,25 @@
                     </div>
                 </div>
             </div>
-        </div> 
-
-        <title>Добавяне на тема</title>
-        <body class="bodyclass">
-            <div class="form-style-2">
-                <div class="form-style-2-heading">Добавяне на тема</div>
-                <form action="../database/entities/my_test.php" method="post">
-                    <label for="title"><span>Заглавие</span><span class="required">*</span>
-                    <input id="title" name="title" type="text" class="input-field" placeholder="Не по-дълго от 30 символа" /></label> 
-
-                    <label for="topicNumber"><span>Номер</span><span class="required">*</span>
-                    <input id="topicNumber" name="topicNumber" type="text" class="input-field" placeholder="Номер в Puffin" /></label> 
-                    
-                    <label for="extraInfo"><span>Допълнителна информация</span><span></span>
-                    <textarea id="extraInfo" name="extraInfo" class="textarea-field" ></textarea></label>
-                    <br />
-                    <label><span></span><span></span><input id="Insert" type="submit" value="Запиши" ></input></label>      
-                </form>
-            </div>
-        </body>
+        </div>
     </head>
+    <body class="bodyclass">
+        <title>Добавяне на тема</title>
+        <div class="form-style-2">
+            <div class="form-style-2-heading">Добавяне на тема</div>
+            <form id="topic-submit-form" action="../database/entities/my_test.php" method="post">
+                <label for="title"><span>Заглавие</span><span class="required">*</span>
+                <input id="title" name="title" type="text" class="input-field" placeholder="Не по-дълго от 30 символа" /></label>
+
+                <label for="topicNumber"><span>Номер</span><span class="required">*</span>
+                <input id="topicNumber" name="topicNumber" type="text" class="input-field" placeholder="Номер в Puffin" /></label>
+
+                <label for="extraInfo"><span>Допълнителна информация</span><span></span>
+                <textarea id="extraInfo" name="extraInfo" class="textarea-field" ></textarea></label>
+                <br />
+                <label><span></span><span></span><input id="topic-submit" type="submit" value="Запиши" ></input></label>
+                <div id="topic-submit-response"></div>
+            </form>
+        </div>
+    </body>
 </html>

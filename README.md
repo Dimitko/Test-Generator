@@ -139,6 +139,8 @@ https://github.com/vladimarkova/mypoetry
 
 
 ### Backlog
+1. Form validations + Backend validations
+2. Server returning {success, message}
 1. Allow only requests for api/ folder
 1. Error handling for unexisting topic
 5. Incoming content type != application/json should not result in an internal server error - it's a client error
