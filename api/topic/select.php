@@ -49,7 +49,7 @@
 
 
     function topicSelectAll() {
-        $sql = "SELECT * FROM topic";
+        $sql = "SELECT * FROM topic ORDER BY topicNumber";
         $result = executeDBQuery($sql);
 
         if ($result) {
