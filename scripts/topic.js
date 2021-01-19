@@ -10,7 +10,7 @@ const submitTopic = e => {
     "extraInfo": document.getElementById('extraInfo').value,
   }
 
-  fetch('http://localhost:8888/Test-Generator/api/topic/insert.php', {
+  fetch('http://localhost/Test-Generator/api/topic/insert.php', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
