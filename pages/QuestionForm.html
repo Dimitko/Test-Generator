@@ -21,21 +21,21 @@
         <div class="form-style-2">
             <div class="form-style-2-heading">Добавяне на въпрос</div>
             <form action="my_test.php" method="post">
-                <label for="topicNum"><span>Номер на тема</span><span class="required">*</span>
-                <input id="topicNum" name="topicNum" type="text" class="input-field"  placeholder="Номер в Puffin" /></label>
+                <label for="question_nr"><span>Номер на тема</span><span class="required">*</span>
+                <input id="question_nr" name="question_nr" type="text" class="input-field"  placeholder="Номер в Puffin" /></label>
 
                 <br />
 
-                <label for="purpose"><span>Цел на въпроса</span><span class="required">*</span>
-                <input id="purpose" name="purpose" type="text" class="input-field"/></label>
+                <label for="aim"><span>Цел на въпроса</span><span class="required">*</span>
+                <input id="aim" name="aim" type="text" class="input-field"/></label>
 
                 <br />
 
                 <label for="type"><span>Тип на въпроса</span><span class="required">*</span>
                 <select id="type" name="type" class="select-field">
-                <option value="1">За предварителни знания (pre-question)</option>
-                <option value="2">По време на презентацията (poll question)</option>
-                <option value="3">След презентацията (test your knowledge)</option>
+                    <option value="1">За предварителни знания (pre-question)</option>
+                    <option value="2">По време на презентацията (poll question)</option>
+                    <option value="3">След презентацията (test your knowledge)</option>
                 </select>
                 </label>
 
@@ -47,53 +47,73 @@
                 <br />
                 <br />
 
-                <label for="extraInfo"><span>Съдържание</span><span class="required">*</span>
-                <textarea id="extraInfo" name="extraInfo" class="textarea-field"></textarea></label>
+                <label for="question_text"><span>Съдържание</span><span class="required">*</span>
+                <textarea id="question_text" name="question_text" class="textarea-field"></textarea></label>
 
                 <br />
                 <br />
 
-                <label for="rightAnswer"><span>Опция 1</span><span class="required">*</span>
-                <textarea id="rightAnswer" name="rightAnswer" class="textarea-field"></textarea></label>
+                <label for="option_1"><span>Опция 1</span><span class="required">*</span>
+                <textarea id="option_1" name="option_1" class="textarea-field"></textarea></label>
 
                 <br />
                 <br />
 
-                <label for="wrongAnswer1"><span>Опция 2</span><span class="required">*</span>
-                <textarea id="wrongAnswer1" name="wrongAnswer1" class="textarea-field"></textarea></label>
+                <label for="option_2"><span>Опция 2</span><span class="required">*</span>
+                <textarea id="option_2" name="option_2" class="textarea-field"></textarea></label>
+                
+                <br />
+                <br />
+
+                <label for="option_3"><span>Опция 3</span><span class="required">*</span>
+                <textarea id="option_3" name="option_3" class="textarea-field"></textarea></label>
 
                 <br />
                 <br />
 
-                <label for="wrongAnswer2"><span>Опция 3</span><span class="required">*</span>
-                <textarea id="wrongAnswer2" name="wrongAnswer2" class="textarea-field"></textarea></label>
+                <label for="option_4"><span>Опция 4</span><span class="required">*</span>
+                <textarea id="option_4" name="option_4" class="textarea-field"></textarea></label>
 
                 <br />
                 <br />
 
-                <label for="wrongAnswer3"><span>Опция 4</span><span class="required">*</span>
-                <textarea id="wrongAnswer3" name="wrongAnswer3" class="textarea-field"></textarea></label>
-
-                <br />
-                <br />
-
-                <label for="responseIfRight"><span>Обратна връзка при верен отговор</span><span class="required">*</span>
-                <input id="responseIfRight" name="responseIfRight" type="text" class="input-field" placeholder="Отлично! Повече по темата в секция 4.3.
+                <label for="answer">
+                <span>Верен отговор</span>
+                <span class="required"></span>
+                <select id="answer" name="answer" class="select-field">
+                    <option value="1">Опция 1</option>
+                    <option value="2">Опция 2</option>
+                    <option value="3">Опция 3</option>
+                    <option value="4">Опция 4</option>
+                </select>
+                </label>
+                
+                <label for="feedback_correct"><span>Обратна връзка при верен отговор</span><span class="required">*</span>
+                <input id="feedback_correct" name="feedback_correct" type="text" class="input-field" placeholder="Отлично! Повече по темата в секция 4.3.
                 "/></label>
 
                 <br />
 
-                <label for="responseIfWrong"><span>Обратна връзка при грешен отговор</span><span class="required">*</span>
-                <input id="responseIfWrong" name="responseIfWrong" type="text" class="input-field" placeholder="Не е така! Повече по темата в секция 4.3.
+                <label for="feedback_incorrect"><span>Обратна връзка при грешен отговор</span><span class="required">*</span>
+                <input id="feedback_incorrect" name="feedback_incorrect" type="text" class="input-field" placeholder="Не е така! Повече по темата в секция 4.3.
                 "/></label>
 
                 <br />
                 <br />
 
-                <label for="extraInfo"><span>Забележки</span><span></span>
-                <textarea id="extraInfo" name="extraInfo" class="textarea-field" placeholder="Линкове към източници, препратки, особености на въпроса" ></textarea></label>
+                <label for="notes"><span>Забележки</span><span></span>
+                <textarea id="notes" name="notes" class="textarea-field" placeholder="Линкове към източници, препратки, особености на въпроса" ></textarea></label>
+                
                 <br />
-                <label><span></span><span></span><input id="Insert" type="submit" value="Запиши" ></input></label>
+                <br />
+
+                <label for="fn"><span>Факултетен номер</span><span class="required">*</span>
+                <input id="fn" name="fn" type="text" class="input-field" placeholder="Въведете факултетен номер"/></label>
+
+                <br />
+                <label><span></span><span></span><input id="question-submit" type="submit" value="Запиши" ></input></label>
+                
+                <div id="question-submit-response"></div>
             </form>
         </div>
     </body>

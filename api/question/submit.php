@@ -17,7 +17,6 @@
 
     function submitQuestion($request){
         $fn = isset($request["fn"]) ? $request["fn"] : "";
-        $topic_id = isset($request["topic_id"]) ? $request["topic_id"] : "";
         $question_nr = isset($request["question_nr"]) ? $request["question_nr"] : "";
         $aim = isset($request["aim"]) ? $request["aim"] : "";
         $question_text = isset($request["question_text"]) ? $request["question_text"] : "";
@@ -32,7 +31,7 @@
         $notes = isset($request["notes"]) ? $request["notes"] : "";
         $type = isset($request["type"]) ? $request["type"] : "";
 
-        if (!$topic_id) {
+        if (!$question_nr) {
             $response = ["success" => false, "message" => "Номера на тема е задължително поле!"];
             return $response;
         }
@@ -59,6 +58,16 @@
         }
         if (!$answer) {
             $response = ["success" => false, "message" => "Верен отговор е задължителен!"];
+            return $response;
+        }
+
+        if (!$feedback_correct) {
+            $response = ["success" => false, "message" => "Обратна връзка при верен отговор е задължителна!"];
+            return $response;
+        }
+
+        if (!$feedback_incorrect) {
+            $response = ["success" => false, "message" => "Обратна връзка при грешен отговор е задължителна!"];
             return $response;
         }
 
