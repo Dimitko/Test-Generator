@@ -27,21 +27,30 @@ const submitQuestion = e => {
     }).then(
     response => response.json()
     ).then(
-    response => parseResponse(response)
-    );
+      response => parseResponse(response)
+    )
 }
 
 function parseResponse(response) {
-    success = response["success"];
+
+  success = response["success"];
+  console.log("success");
+  console.log(success);
+  color = "red";
     if (success) {
       cleanQuestionSubmitForm();
+      color = "green";
     }
-    document.getElementById("question-submit-response").innerHTML = response["message"];
-  }
-  
+  questionSubmitResponse = document.getElementById("question-submit-response");
+  questionSubmitResponse.innerHTML = '<h1>' + response["message"] + '</h1>'
+  questionSubmitResponse.style = "font-size:50px;color:" + color
+
+  window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })
+}
+
   function cleanQuestionSubmitForm() {
     document.getElementById('fn').value = "";
-    document.getElementById('question_nr').value = "";
+    // document.getElementById('question_nr').value = "";
     document.getElementById('aim').value = "";
     document.getElementById('question_text').value = "";
     document.getElementById('option_1').value = "";
@@ -58,4 +67,21 @@ function parseResponse(response) {
 
 (function () {
     document.getElementById('question-submit').addEventListener('click', submitQuestion);
-  })();
+})();
+
+// (function() {
+//   document.getElementById('fn').value = "81319";
+//   document.getElementById('topic_id').value = "1000";
+//   document.getElementById('aim').value = "Aim aim";
+//   document.getElementById('question_text').value = "Question question question question";
+//   document.getElementById('option_1').value = "Option 1, option 1";
+//   document.getElementById('option_2').value = "Option 2, option 2";
+//   document.getElementById('option_3').value = "Option 3, option 3";
+//   document.getElementById('option_4').value = "Option 4, option 4";
+//   document.getElementById('answer').value = "Answer answer";
+//   document.getElementById('difficulty').value = "8";
+//   document.getElementById('feedback_correct').value = "Bravo";
+//   document.getElementById('feedback_incorrect').value = "Losho";
+//   document.getElementById('notes').value = "Note note note note";
+//   document.getElementById('type').value = "1";
+// })();

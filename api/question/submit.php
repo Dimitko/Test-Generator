@@ -11,7 +11,7 @@
         $request = parseRequest();
 
         $response = submitQuestion($request);
-        
+
         echo json_encode($response);
     }
 
@@ -77,13 +77,16 @@
             return $response;
         }
 
+
+        $topic_id = executeDBQuery("SELECT topicID FROM topic WHERE topicNumber=$topic_id")[0]["topicID"];
+
         $sql = "INSERT INTO question(timestamp, fn, topic_id, question_nr, aim, question_text,
         option_1, option_2, option_3, option_4, answer,
         difficulty, feedback_correct, feedback_incorrect, notes, type)
         VALUES(now(), '$fn', '$topic_id', '$question_nr', '$aim', '$question_text',
         '$option_1', '$option_2', '$option_3', '$option_4', '$answer',
         '$difficulty', '$feedback_correct', '$feedback_incorrect', '$notes', '$type')";
-        $result = insertQuery($sql);
+        $result = insertUpdateQuery($sql);
 
         if($result){
             $message = 'Успешно добавихте нов въпрос';
