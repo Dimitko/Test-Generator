@@ -21,8 +21,6 @@ const submitTopic = e => {
   ).then(
     response => parseResponse(response)
   );
-
-
 }
 
 function parseResponse(response) {

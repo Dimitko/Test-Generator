@@ -17,6 +17,7 @@
 
     function submitQuestion($request){
         $fn = isset($request["fn"]) ? $request["fn"] : "";
+        $topic_id = isset($request["topic_id"]) ? $request["topic_id"] : "";
         $question_nr = isset($request["question_nr"]) ? $request["question_nr"] : "";
         $aim = isset($request["aim"]) ? $request["aim"] : "";
         $question_text = isset($request["question_text"]) ? $request["question_text"] : "";
@@ -31,8 +32,13 @@
         $notes = isset($request["notes"]) ? $request["notes"] : "";
         $type = isset($request["type"]) ? $request["type"] : "";
 
-        if (!$question_nr) {
-            $response = ["success" => false, "message" => "Номера на тема е задължително поле!"];
+        if (!$fn) {
+            $response = ["success" => false, "message" => "Факултетен номер е задължително поле!"];
+            return $response;
+        }
+
+        if (!$topic_id) {
+            $response = ["success" => false, "message" => "Номер на тема е задължително поле!"];
             return $response;
         }
 
