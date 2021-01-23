@@ -80,4 +80,5 @@
 .form-style-2 input[type=button]:hover{
 	background: rgb(24, 92, 38);
 	color: #fff;
+	cursor: pointer;
 }

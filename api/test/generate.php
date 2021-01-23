@@ -17,9 +17,15 @@
 
     function makeTest($request) {
         $topicNumber = isset($request["topicNumber"]) ? $request["topicNumber"] : "";
+        $testType = isset($request["testType"]) ? $request["testType"] : "";
 
         if ($topicNumber === "") {
             $response = ["success" => false, "message" => "Номерът на тема е задължително поле!"];
+            return $response;
+        }
+
+        if ($testType === "") {
+            $response = ["success" => false, "message" => "Моля изберете тип на теста!"];
             return $response;
         }
 
@@ -32,7 +38,7 @@
             return $response;
         }
 
-        $questions = executeDBQuery("SELECT * FROM question WHERE topic_id=$topic_id");
+        $questions = executeDBQuery("SELECT * FROM question WHERE topic_id=$topic_id AND type=$testType");
 
         if (!$questions) {
             return [];

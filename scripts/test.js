@@ -19,6 +19,22 @@ function listTopics(response) {
     })
 }
 
+function listTypes() {
+    let option1 = document.createElement('option');
+    option1.text = 'За предварителни знания (pre-question)';
+    let option2 = document.createElement('option');
+    option2.text = 'По време на презентацията (poll question)';
+    let option3 = document.createElement('option');
+    option3.text = 'След презентацията (test your knowledge)';
+    option1.value = 1;
+    option2.value = 2;
+    option3.value = 3;
+    selectField = document.getElementById("test-type-select");
+    selectField.appendChild(option1);
+    selectField.appendChild(option2);
+    selectField.appendChild(option3);
+}
+
 const startTest = e => {
     e.preventDefault();
     topicSelectEl = document.getElementById('topic-select')
@@ -26,7 +42,11 @@ const startTest = e => {
     topicIndex = topicSelectEl.selectedIndex;
     topicName = topicSelectEl.options[topicIndex].text;
 
-    generateTestForTopic(topicNumber, topicName);
+    testTypeSelectEl = document.getElementById('test-type-select');
+    testType = testTypeSelectEl.value;
+    // console.log(testType);
+
+    generateTestForTopic(topicNumber, topicName, testType);
 }
 
 const submitTest = e => {
@@ -155,13 +175,13 @@ function buildSubmitRequest() {
     return request;
 }
 
-function generateTestForTopic(topicNumber, topicName) {
+function generateTestForTopic(topicNumber, topicName, testType) {
     fetch('http://localhost/Test-Generator/api/test/generate.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({"topicNumber": topicNumber})
+        body: JSON.stringify({"topicNumber": topicNumber, "testType": testType})
     }).then(
         response => response.json()
     ).then(
@@ -242,6 +262,8 @@ function buildQuestionText(question) {
 
 // On load
 getAllTopics();
+
+listTypes();
 
 (function () {
     document.getElementById('topic-submit').addEventListener('click', startTest);
