@@ -40,21 +40,33 @@ const importQuestion = e => {
       if (typeof (FileReader) != "undefined") {
           var reader = new FileReader();
           reader.onload = function (e) {
-              var table = document.createElement("table");
               var rows = e.target.result.split("\n");
-              for (var i = 0; i < rows.length; i++) {
+              import_questions = [];
+              for (var i = 1; i < rows.length; i++) {
                   var cells = rows[i].split(",");
-                  if (cells.length > 1) {
-                      var row = table.insertRow(-1);
-                      for (var j = 0; j < cells.length; j++) {
-                          var cell = row.insertCell(-1);
-                          cell.innerHTML = cells[j];
-                      }
+                  if (cells.length > 1 && i != 1) {
+                      import_question = {};
+                      import_question.timestamp = cells[1];
+                      import_question.fn = cells[2];
+                      import_question.topic_id = cells[3];
+                      import_question.question_nr = cells[4];
+                      import_question.aim = cells[5];
+                      import_question.question_text = cells[6];
+                      import_question.option_1 = cells[7];
+                      import_question.option_2 = cells[8];
+                      import_question.option_3 = cells[9];
+                      import_question.option_4 = cells[10];
+                      import_question.answer = cells[11];
+                      import_question.difficulty = cells[12];
+                      import_question.feedback_correct = cells[13];
+                      import_question.feedback_incorrect = cells[14];
+                      import_question.notes = cells[15];
+                      import_question.type = cells[16];
+
+                      import_questions.push(import_question);
                   }
               }
-              var dvCSV = document.getElementById("dvCSV");
-              dvCSV.innerHTML = "";
-              dvCSV.appendChild(table);
+              console.log(import_questions);
           }
           reader.readAsText(fileUpload.files[0]);
       } else {
@@ -63,10 +75,7 @@ const importQuestion = e => {
   } else {
       alert("Please upload a valid CSV file.");
   }
-
-  console.log('Hello!');
 }
-
 
 function parseResponse(response) {
 
