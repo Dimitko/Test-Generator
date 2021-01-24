@@ -21,6 +21,15 @@
     <body class="bodyclass">
         <div class="form-style-2">
             <div class="form-style-2-heading">Добавяне на въпрос</div>
+
+            <button id="question-import" type="submit">import CSV</button>
+           
+            <input type="file" id="file-upload" />
+            <!-- <input type="button" id="question-import" value="import CSV" /> -->
+
+            <br />
+            <br />
+
             <form>
                 <label for="topic_id"><span>Номер на тема</span><span class="required">*</span>
                 <input id="topic_id" name="topic_id" type="text" class="input-field"  placeholder="Номер в Puffin" /></label>
@@ -34,9 +43,9 @@
 
                 <label for="type"><span>Тип на въпроса</span><span class="required">*</span>
                 <select id="type" name="type" class="select-field">
-                    <option value="1">За предварителни знания (pre-question)</option>
-                    <option value="2">По време на презентацията (poll question)</option>
-                    <option value="3">След презентацията (test your knowledge)</option>
+                    <option value=1>За предварителни знания (pre-question)</option>
+                    <option value=2>По време на презентацията (poll question)</option>
+                    <option value=3>След презентацията (test your knowledge)</option>
                 </select>
                 </label>
 
@@ -113,9 +122,11 @@
 
                 <br />
                 <label><span></span><span></span><input id="question-submit" type="submit" value="Запиши" ></input></label>
-
+                
                 <div id="question-submit-response"></div>
             </form>
+
+            <div id="dvCSV"></div>
         </div>
     </body>
 </html>
