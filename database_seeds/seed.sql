@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 18, 2021 at 09:13 PM
+-- Generation Time: Jan 24, 2021 at 08:28 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.0
 
@@ -76,7 +76,34 @@ INSERT INTO `question` (`id`, `timestamp`, `fn`, `topic_id`, `question_nr`, `aim
 (22, '2020-11-21 18:25:43', 81682, 0, 1, 'проверка до каква степен от аудиторията е чувала за React', 'Какво е React JS', 'база данни', 'библиотека за създаване на потребителски интерфейси', 'сървър', 'SDK за създаване на потребителски интерфейси', 2, 2, 'Верен отговор. Отлично! ', 'Грешка! За повече информация по темата виж началото от реферата.', 'въпрос за разчупване на леда', 1),
 (23, '2020-11-26 18:01:08', 81271, 0, 9, 'FETCH API and JQuery', 'Кое не е част от разликите между Fetch API и jQuery.ajax()?', 'Дори и при използването на по-стари версии на браузърите, не е необходимо да мислим за включването на \" credentials: \'same-origin\' \"', 'Възможно е установяването на cross-site сесия с използването на fetch(). fetch() може да получава cross-site бисквитки', 'fetch() ще изпрати бисквинките само ако \" credentials: \'same-origin\' \" е set-нато', 'Promise обектът, върнат от fetch(), не би отхвърлил HTTP error status дори ако отговорът е HTTP 404 или 500, ще приключи нормално с ok стаус, set-нат на false', 1, 4, 'Отлично! За повече информация по темата виж секция \"Fetch API \"на реферата.', 'Не е така! За повече информация по темата виж секция \"Fetch API\" на реферата.', 'https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API', 2),
 (24, '2020-11-26 18:25:08', 81271, 0, 10, 'asynchronous programming', 'Асинхронното програмиране има ред предимства. В кои от следните ситауции бихте го използвали?', 'При обработка на силно зависими данни, получени със заявка към базата ', 'Когато се целим повече към простота отклокото към ефикасност, изпълняваме по-прости и кратки операции', 'Ако има ресурси, които се използват от еднакви, зависими елементи, и много нишки, отговарящи за ресурсите и функционалността  ', 'Има случаи, в които използването на определени технологии, налага използването му, както например програмирането на Android приожения с използването на MIT App Inventor ', 1, 4, 'Отлично!', 'Не е така! ', 'https://stackify.com/when-to-use-asynchronous-programming/', 2),
-(25, '2013-04-02 12:12:26', 9999, 1, 1, 'Да провери колко време отнема писането на реферат по WWW.', 'Колко време според вас отнема писането на реферат по WWW технологии?', '20+ часа', '10 часа', '5 часа', '1 час', 1, 5, 'Браво! Наистина времето за писане на един реферат е между 20 и 30 часа. Виж информацията в мудъл за разпределението по часове.', 'Далече от истината! Времето за писане на един реферат е между 20 и 30 часа. Виж информацията в мудъл за разпределението по часове.', 'Виж: http://moodle.le.tsdoit.org/pluginfile.php/842/mod_forum/attachment/139/wwwTech_Evaluation_Instructions_v3.pdf', NULL);
+(25, '2013-04-02 12:12:26', 9999, 1, 1, 'Да провери колко време отнема писането на реферат по WWW.', 'Колко време според вас отнема писането на реферат по WWW технологии?', '20+ часа', '10 часа', '5 часа', '1 час', 1, 5, 'Браво! Наистина времето за писане на един реферат е между 20 и 30 часа. Виж информацията в мудъл за разпределението по часове.', 'Далече от истината! Времето за писане на един реферат е между 20 и 30 часа. Виж информацията в мудъл за разпределението по часове.', 'Виж: http://moodle.le.tsdoit.org/pluginfile.php/842/mod_forum/attachment/139/wwwTech_Evaluation_Instructions_v3.pdf', NULL),
+(41, '2021-01-20 09:18:54', 81319, 15, 1, 'Aim aim', 'Question question question question', 'Option 1, option 1', 'Option 2, option 2', 'Option 3, option 3', 'Option 4, option 4', 1, 8, 'Bravo', 'Losho', 'Note note note note', 1),
+(42, '2021-01-20 09:19:09', 81319, 15, 1, 'Aim aim', 'Question question question question', 'Option 1, option 1', 'Option 2, option 2', 'Option 3, option 3', 'Option 4, option 4', 1, 8, 'Bravo', 'Losho', 'Note note note note', 1),
+(43, '2021-01-20 09:19:31', 81319, 15, 1, 'Aim aim', 'Question question question question', 'Option 1, option 1', 'Option 2, option 2', 'Option 3, option 3', 'Option 4, option 4', 1, 8, 'Bravo', 'Losho', 'Note note note note', 1),
+(44, '2021-01-20 09:20:59', 81319, 15, 1, 'Aim aim', 'Question question question question', 'Option 1, option 1', 'Option 2, option 2', 'Option 3, option 3', 'Option 4, option 4', 1, 8, 'Bravo', 'Losho', 'Note note note note', 1),
+(45, '2021-01-20 09:22:03', 81319, 15, 1, 'Aim aim', 'Question question question question', 'Option 1, option 1', 'Option 2, option 2', 'Option 3, option 3', 'Option 4, option 4', 1, 8, 'Bravo', 'Losho', 'Note note note note', 1),
+(46, '2021-01-20 09:23:32', 81319, 15, 1, 'Aim aim', 'Question question question question', 'Option 1, option 1', 'Option 2, option 2', 'Option 3, option 3', 'Option 4, option 4', 1, 8, 'Bravo', 'Losho', 'Note note note note', 1),
+(47, '2021-01-20 09:23:39', 81319, 15, 1, 'Aim aim', 'Question question question question', 'Option 1, option 1', 'Option 2, option 2', 'Option 3, option 3', 'Option 4, option 4', 1, 8, 'Bravo', 'Losho', 'Note note note note', 1),
+(48, '2021-01-20 09:24:37', 81319, 15, 1, 'Aim aim', 'Question question question question', 'Option 1, option 1', 'Option 2, option 2', 'Option 3, option 3', 'Option 4, option 4', 1, 8, 'Bravo', 'Losho', 'Note note note note', 1),
+(49, '2021-01-20 09:25:27', 81319, 15, 1, 'Aim aim', 'Question question question question', 'Option 1, option 1', 'Option 2, option 2', 'Option 3, option 3', 'Option 4, option 4', 1, 8, 'Bravo', 'Losho', 'Note note note note', 1),
+(50, '2021-01-20 09:25:53', 81319, 15, 1, 'Aim aim', 'Question question question question', 'Option 1, option 1', 'Option 2, option 2', 'Option 3, option 3', 'Option 4, option 4', 1, 8, 'Bravo', 'Losho', 'Note note note note', 1),
+(51, '2021-01-20 09:26:24', 81319, 15, 1, 'Aim aim', 'Question question question question', 'Option 1, option 1', 'Option 2, option 2', 'Option 3, option 3', 'Option 4, option 4', 1, 8, 'Bravo', 'Losho', 'Note note note note', 1),
+(52, '2021-01-20 09:27:44', 81319, 15, 1, 'Aim aim', 'Question question question question', 'Option 1, option 1', 'Option 2, option 2', 'Option 3, option 3', 'Option 4, option 4', 1, 8, 'Bravo', 'Losho', 'Note note note note', 1),
+(53, '2021-01-20 09:37:41', 81319, 15, 1, 'Aim aim', 'Question question question question', 'Option 1, option 1', 'Option 2, option 2', 'Option 3, option 3', 'Option 4, option 4', 1, 8, 'Bravo', 'Losho', 'Note note note note', 1),
+(54, '2021-01-20 09:37:42', 81319, 15, 1, 'Aim aim', 'Question question question question', 'Option 1, option 1', 'Option 2, option 2', 'Option 3, option 3', 'Option 4, option 4', 1, 8, 'Bravo', 'Losho', 'Note note note note', 1),
+(55, '2021-01-20 10:11:13', 81319, 23, 1, 'Цел цел', 'Съдържание', 'Опция1', 'Опция2', 'Опция3', 'Опция4', 2, 7, 'Отлично', 'Грешка', '', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sessions`
+--
+
+CREATE TABLE `sessions` (
+  `sessionID` int(16) NOT NULL,
+  `expires` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `facultyNr` int(16) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -124,7 +151,27 @@ INSERT INTO `topic` (`topicID`, `title`, `topicNumber`, `extraInfo`) VALUES
 (7, 'CSS', 6, 'Layouts. Flexbox.'),
 (8, 'Анимации със CSS', 7, 'Използване на трансформации.'),
 (9, 'Еммет синтаксис', 8, ''),
-(10, 'Fetch API and XHR', 16, 'Трябва update!');
+(10, 'Fetch API and XHR', 16, 'Трябва update!'),
+(12, 'IP over Avian Carriers', 1990, 'https://en.wikipedia.org/wiki/IP_over_Avian_Carriers\n\nhttps://tools.ietf.org/html/rfc1149'),
+(13, 'Power Rangers', 1993, 'https://en.wikipedia.org/wiki/Power_Rangers'),
+(14, 'Power Rangers', 1993, 'https://en.wikipedia.org/wiki/Power_Rangers'),
+(15, 'Title-1', 1000, 'Extra info for Title-1'),
+(16, 'Title-2', 1001, 'Extra info for Title-2'),
+(17, 'Title-3', 1003, ''),
+(18, 'Тема 16', 1016, ''),
+(23, 'Тема Тема Тема', 126, 'Линкове');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `facultyNr` int(16) UNSIGNED NOT NULL,
+  `topicNr` int(16) UNSIGNED NOT NULL,
+  `role` varchar(16) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Indexes for dumped tables
@@ -138,10 +185,22 @@ ALTER TABLE `question`
   ADD KEY `topic_id` (`topic_id`);
 
 --
+-- Indexes for table `sessions`
+--
+ALTER TABLE `sessions`
+  ADD PRIMARY KEY (`sessionID`);
+
+--
 -- Indexes for table `topic`
 --
 ALTER TABLE `topic`
   ADD PRIMARY KEY (`topicID`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`facultyNr`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -151,13 +210,13 @@ ALTER TABLE `topic`
 -- AUTO_INCREMENT for table `question`
 --
 ALTER TABLE `question`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT for table `topic`
 --
 ALTER TABLE `topic`
-  MODIFY `topicID` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `topicID` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- Constraints for dumped tables
