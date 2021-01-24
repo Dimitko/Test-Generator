@@ -1,6 +1,4 @@
-function a() {
-  console.log("works");
-}
+checkLoggedIn();
 
 const submitTopic = e => {
   e.preventDefault();

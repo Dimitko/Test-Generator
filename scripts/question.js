@@ -1,3 +1,5 @@
+checkLoggedIn();
+
 const submitQuestion = e => {
   e.preventDefault();
   question_data = {

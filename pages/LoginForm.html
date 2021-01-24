@@ -14,21 +14,21 @@
         <link href="../styles/FormStyling.css" rel="stylesheet"></link>
 
         <script type="text/javascript" src="/Test-Generator/scripts/navigation_bar.js" defer></script>
+        <script type="text/javascript" src="/Test-Generator/scripts/login_utils.js" defer></script>
+        <script type="text/javascript" src="/Test-Generator/scripts/login.js" defer></script>
 
         <title>Вход</title>
     </head>
     <body class="bodyclass">
-        <div class="form-style-2">
+        <div class="form-style-2" id="login-form-container">
             <div class="form-style-2-heading">Вход</div>
-            <form action="my_test.php" method="post">
-                <label for="username"><span>Потребителско име</span><span class="required">*</span>
-                <input id="username" name="username" type="text" class="input-field" placeholder="Въведете потребителско име" /></label>
-
-                <label for="password"><span>Парола</span><span class="required">*</span>
-                <input id="password" name="password" type="text" class="input-field" placeholder="Въведете парола" /></label>
-                <br />
-                <label><span></span><span></span><input id="Login" type="submit" value="Вход" ></input></label>
+            <form id="login-form">
+                <label for="faculty-number"><span>Факултетен номер</span><span class="required">*</span>
+                <input id="faculty-number" name="faculty-number" type="text" class="input-field" placeholder="Въведете факултетен номер" /></label>
+                <label><span></span><span></span><input id="login-button" type="submit" value="Вход" ></input></label>
             </form>
+            <div id="already-logged-in" hidden="true">Вече сте логнати с факултетен номер: </div>
+            <div id="successfully-logged-in" hidden="true">Успешно се логнахте с факултетен номер: </div>
         </div>
     </body>
 </html>
