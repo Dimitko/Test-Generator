@@ -35,46 +35,52 @@ const importQuestion = e => {
   e.preventDefault();
 
   var fileUpload = document.getElementById("file-upload");
-  var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.csv|.txt)$/;
-  if (regex.test(fileUpload.value.toLowerCase())) {
-      if (typeof (FileReader) != "undefined") {
-          var reader = new FileReader();
-          reader.onload = function (e) {
-              var rows = e.target.result.split("\n");
-              import_questions = [];
-              for (var i = 1; i < rows.length; i++) {
-                  var cells = rows[i].split(",");
-                  if (cells.length > 1 && i != 1) {
-                      import_question = {};
-                      import_question.timestamp = cells[1];
-                      import_question.fn = cells[2];
-                      import_question.topic_id = cells[3];
-                      import_question.question_nr = cells[4];
-                      import_question.aim = cells[5];
-                      import_question.question_text = cells[6];
-                      import_question.option_1 = cells[7];
-                      import_question.option_2 = cells[8];
-                      import_question.option_3 = cells[9];
-                      import_question.option_4 = cells[10];
-                      import_question.answer = cells[11];
-                      import_question.difficulty = cells[12];
-                      import_question.feedback_correct = cells[13];
-                      import_question.feedback_incorrect = cells[14];
-                      import_question.notes = cells[15];
-                      import_question.type = cells[16];
-
-                      import_questions.push(import_question);
-                  }
-              }
-              console.log(import_questions);
-          }
-          reader.readAsText(fileUpload.files[0]);
-      } else {
-          alert("This browser does not support HTML5.");
+  questions = "Hello";
+  config = {
+    complete: function (result, file) {
+      questions = result['data'];
+      for (let i = 1; i < questions.length; i++) {
+        console.log(questionToJSON(questions[i]));
+        sendQuestion(questionToJSON(questions[i]));
       }
-  } else {
-      alert("Please upload a valid CSV file.");
+    }
   }
+  Papa.parse(fileUpload.files[0], config);
+}
+
+function questionToJSON(question) {
+  import_question = {};
+  import_question.timestamp = question[1];
+  import_question.fn = question[2];
+  import_question.topic_id = question[3];
+  import_question.question_nr = question[4];
+  import_question.aim = question[5];
+  import_question.question_text = question[6];
+  import_question.option_1 = question[7];
+  import_question.option_2 = question[8];
+  import_question.option_3 = question[9];
+  import_question.option_4 = question[10];
+  import_question.answer = question[11];
+  import_question.difficulty = question[12];
+  import_question.feedback_correct = question[13];
+  import_question.feedback_incorrect = question[14];
+  import_question.notes = question[15];
+  import_question.type = question[16];
+  return import_question;
+}
+
+function sendQuestion(question) {
+  fetch('http://localhost/Test-Generator/api/question/submit.php', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(question)
+    }).then(
+    response => response.json()
+    ).then(
+      response => console.log(response)
+    )
 }
 
 function parseResponse(response) {

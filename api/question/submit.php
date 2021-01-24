@@ -5,8 +5,6 @@
 
     $requestURL = $_SERVER["REQUEST_URI"];
 
-    handleSubmitQuestion();
-
     function handleSubmitQuestion(){
         $request = parseRequest();
 
@@ -14,6 +12,8 @@
 
         echo json_encode($response);
     }
+
+    handleSubmitQuestion();
 
     function submitQuestion($request){
         $fn = isset($request["fn"]) ? $request["fn"] : "";
@@ -37,7 +37,7 @@
             return $response;
         }
 
-        if (!$topic_id) {
+        if ($topic_id === "") {
             $response = ["success" => false, "message" => "Номер на тема е задължително поле!"];
             return $response;
         }
