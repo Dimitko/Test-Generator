@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 25, 2021 at 08:32 PM
+-- Generation Time: Jan 25, 2021 at 08:49 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.0
 
@@ -92,6 +92,20 @@ INSERT INTO `question` (`id`, `timestamp`, `fn`, `topic_id`, `question_nr`, `aim
 (53, '2021-01-20 09:37:41', 81319, 15, 1, 'Aim aim', 'Question question question question', 'Option 1, option 1', 'Option 2, option 2', 'Option 3, option 3', 'Option 4, option 4', 1, 8, 'Bravo', 'Losho', 'Note note note note', 1),
 (54, '2021-01-20 09:37:42', 81319, 15, 1, 'Aim aim', 'Question question question question', 'Option 1, option 1', 'Option 2, option 2', 'Option 3, option 3', 'Option 4, option 4', 1, 8, 'Bravo', 'Losho', 'Note note note note', 1),
 (55, '2021-01-20 10:11:13', 81319, 23, 1, 'Цел цел', 'Съдържание', 'Опция1', 'Опция2', 'Опция3', 'Опция4', 2, 7, 'Отлично', 'Грешка', '', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `question_history`
+--
+
+CREATE TABLE `question_history` (
+  `questionID` int(16) NOT NULL,
+  `userID` int(16) UNSIGNED NOT NULL,
+  `answered` varchar(16) NOT NULL,
+  `correct` tinyint(1) NOT NULL,
+  `timestamp` int(32) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -203,6 +217,14 @@ ALTER TABLE `question`
   ADD KEY `topic_id` (`topic_id`);
 
 --
+-- Indexes for table `question_history`
+--
+ALTER TABLE `question_history`
+  ADD PRIMARY KEY (`questionID`),
+  ADD KEY `questionID` (`questionID`),
+  ADD KEY `userID` (`userID`);
+
+--
 -- Indexes for table `sessions`
 --
 ALTER TABLE `sessions`
@@ -247,6 +269,13 @@ ALTER TABLE `topic`
 --
 ALTER TABLE `question`
   ADD CONSTRAINT `question_ibfk_1` FOREIGN KEY (`topic_id`) REFERENCES `topic` (`topicID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `question_history`
+--
+ALTER TABLE `question_history`
+  ADD CONSTRAINT `questionID` FOREIGN KEY (`questionID`) REFERENCES `question` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `userID` FOREIGN KEY (`userID`) REFERENCES `users` (`facultyNr`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `users`
