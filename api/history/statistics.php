@@ -16,10 +16,14 @@
     handleStatistics();
 
     function questionStatistics($request){
+        error_log("Received Request");
+        error_log(json_encode($request));
+
         $question_id = $request["question_id"];
         $question_history = executeDBQuery("SELECT * FROM question_history WHERE questionID=$question_id");
 
         $question_stats = [
+            "question_id" => $question_id,
             "times_answered" => 0,
             "correct_times_answered" => 0,
             "option_1" => 0,

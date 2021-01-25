@@ -45,14 +45,12 @@ const startTest = e => {
 
     testTypeSelectEl = document.getElementById('test-type-select');
     testType = testTypeSelectEl.value;
-    // console.log(testType);
 
     generateTestForTopic(topicNumber, topicName, testType);
 }
 
 const submitTest = e => {
     e.preventDefault();
-    console.log("До тук работим");
     request = buildSubmitRequest();
     fetch('http://localhost/Test-Generator/api/test/submit.php', {
         method: 'POST',
@@ -177,35 +175,96 @@ function buildSubmitRequest() {
 }
 
 function generateTestForTopic(topicNumber, topicName, testType) {
-    fetch('http://localhost/Test-Generator/api/test/generate.php', {
+    fetch('http://localhost/Test-Generator/api/users/topic_owner.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({"topicNumber": topicNumber, "testType": testType})
+        body: JSON.stringify({ "topicNumber": topicNumber})
     }).then(
         response => response.json()
     ).then(
         response => {
-            buildTestHTML(response, topicName);
+            topic_owner = response["owner_faculty_number"];
+            show_stats = false
+
+            if (topic_owner == user_faculty_number || user_faculty_number == 0) {
+                show_stats = true
+            }
+
+            fetch('http://localhost/Test-Generator/api/test/generate.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ "topicNumber": topicNumber, "testType": testType })
+            }).then(
+                test_response => test_response.json()
+            ).then(
+                test => {
+                    getStatsForQuestions(test, show_stats).then(
+                        questions_statistics_array => {
+                            questions_statistics = {}
+                            questions_statistics_array.forEach(function (item, index) {
+                                questions_statistics[item["question_id"]] = item
+                            })
+                            buildTestHTML(test, topicName, show_stats, questions_statistics);
+                        }
+                    )
+                });
         }
     );
 }
 
+function getStatsForQuestions(test) {
+    if (!show_stats) {
+        return Promise.resolve([])
+    }
+    all_promises = []
+    for (let i = 0; i < test.length; i++) {
+        question_id = test[i]["id"]
+        request_body = {"question_id": question_id}
+        question_promise =  fetch('http://localhost/Test-Generator/api/history/statistics.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(request_body)
+        }).then(
+            response => response.json()
+        )
 
-function buildTestHTML(test, topicName) {
+        all_promises.push(question_promise);
+    }
+
+    return Promise.all(all_promises)
+}
+
+function buildTestHTML(test, topicName, show_stats, question_statistics) {
+    console.log("Building question")
+    console.log("Test length", test.length)
     document.getElementsByClassName("form-style-2-heading")[0].innerText = "Тема " + topicName;
     document.getElementById("topic-select-form").remove()
     form = document.createElement('form')
     form.id = "topic-submit-form"
 
     for (let i = 0; i < test.length; i++) {
+        console.log("Building question i")
         if (i > 0) {
             form.appendChild(document.createElement('BR'));
             form.appendChild(document.createElement('HR'));
         }
 
-        form.appendChild(buildQuestion(i, test[i]));
+        console.log("Building question")
+        if (show_stats) {
+            question = test[i];
+            question_id = question["id"];
+            question_stats = question_statistics[question_id];
+        } else {
+            question_stats = null;
+        }
+
+        form.appendChild(buildQuestion(i, test[i], show_stats, question_stats));
     }
 
     submit_button = document.createElement('input');
@@ -220,7 +279,7 @@ function buildTestHTML(test, topicName) {
     document.getElementsByClassName("form-style-2")[0].appendChild(form);
 }
 
-function buildQuestion(idx, question) {
+function buildQuestion(idx, question, show_stats, question_statistics) {
     question_container = document.createElement("div");
     question_container.id = "question-" + idx + "-container";
     question_container.classList.add("question_container");
@@ -244,10 +303,39 @@ function buildQuestion(idx, question) {
 
         question_container.appendChild(radio_button);
         question_container.appendChild(label);
+
+        console.log("Building question statistics");
+
+        question_container.appendChild(document.createElement("BR"));
+    }
+
+    if (show_stats) {
+        question_container.appendChild(buildQuestionStatistics(question_statistics));
         question_container.appendChild(document.createElement("BR"));
     }
 
     return question_container;
+}
+
+function buildQuestionStatistics(question_statistics) {
+    console.log(question_statistics)
+    stats_paragraph = document.createElement("p");
+    times_answered = question_statistics["times_answered"];
+    correct_times_answered = question_statistics["correct_times_answered"];
+    option_1_answered = question_statistics["option_1"]
+    option_2_answered = question_statistics["option_2"]
+    option_3_answered = question_statistics["option_3"]
+    option_4_answered = question_statistics["option_4"]
+    stats_paragraph.innerText = `
+        Times Answered: ${times_answered},
+        TImes Answered Correctly: ${correct_times_answered},
+        Answer Distribution: ${option_1_answered},${option_2_answered},${option_3_answered},${option_4_answered}
+    `
+
+    stats_paragraph.style.color = "gray";
+    stats_paragraph.style.opacity = 0.8;
+
+    return stats_paragraph;
 }
 
 function buildQuestionText(question) {

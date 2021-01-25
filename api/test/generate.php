@@ -52,7 +52,7 @@
         $result = array();
         $question_nr = 0;
         foreach ($questions as &$q) {
-            if ($question_nr == 10) {
+            if ($question_nr == 1) {
                 break;
             }
 
