@@ -17,8 +17,9 @@
     }
 
     function assessTest($test) {
+      $time = time();
       foreach ($test as &$question) {
-        $assessment = assessQuestion($question);
+        $assessment = assessQuestion($question, $time);
 
         $question["result"] = $assessment["result"];
         $question["feedback"] = $assessment["feedback"];
@@ -31,7 +32,7 @@
       return $test;
     }
 
-    function assessQuestion($question) {
+    function assessQuestion($question, $time) {
       $id = $question["id"];
 
       $ans_nr = 1;
@@ -54,12 +55,12 @@
         $result["correct_answer"] =  $correct_answer_text;
       }
 
-      updateHistory($id, $question["answer"], $is_correct);
+      updateHistory($id, $question["answer"], $is_correct, $time);
 
       return $result;
     }
 
-    function updateHistory($question_id, $answered, $is_correct)  {
+    function updateHistory($question_id, $answered, $is_correct, $time)  {
       if (!isset($_SESSION["faculty_number"])) {
         error_log("Not logged in for history");
         return;
@@ -73,7 +74,6 @@
       }
 
       $fn = $_SESSION["faculty_number"];
-      $time = time();
       $db_columns = 'questionID, userID, answered, correct, timestamp';
       $query = "INSERT INTO question_history($db_columns) VALUES ('$question_id', '$fn', '$answered', $is_correct, '$time')";
       error_log("QUERY");

@@ -343,10 +343,8 @@ function buildQuestionText(question) {
 }
 
 // On load
-getAllTopics();
-
-listTypes();
-
 (function () {
+    listTypes();
+    getAllTopics();
     document.getElementById('topic-submit').addEventListener('click', startTest);
   })();

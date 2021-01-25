@@ -11,7 +11,7 @@ const navHTML = `
           </div>
       </div>
       <a href="/Test-Generator/pages/Test.html"><i class="fa fa-puzzle-piece" aria-hidden="true"></i> Започване на тест</a>
-      <a href="/Test-Generator/pages/Conditions.html"><i class="fa fa-handshake-o" aria-hidden="true"></i> Общи условия</a>
+      <a id="conditions-link" href="/Test-Generator/pages/Conditions.html"><i class="fa fa-handshake-o" aria-hidden="true"></i> Общи условия</a>
       <div class="topnav-right">
           <a id="navbar-login" href="/Test-Generator/pages/LoginForm.html">Вход <i class="fa fa-sign-in" aria-hidden="true"></i></a>
           <div class="dropdown">

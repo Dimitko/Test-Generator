@@ -53,6 +53,20 @@ function updateNavBarLoggedIn() {
   navbar_login = document.getElementById("navbar-login");
   navbar_login.innerText = "Изход"
   navbar_login.addEventListener('click', logout)
+
+  if (user_faculty_number == 0) {
+    updateNavBarAdminPanel();
+  }
+
+}
+
+function updateNavBarAdminPanel() {
+  navbar_conditions = document.getElementById("conditions-link");
+  console.log(navbar_conditions);
+  admin_panel_link = document.createElement("a");
+  admin_panel_link.href = "http://localhost/Test-Generator/pages/AdminPanel.html";
+  admin_panel_link.innerText = 'Администраторски панел';
+  navbar_conditions.parentNode.insertBefore(admin_panel_link, navbar_conditions.nextSibling);
 }
 
 function redirectToLogin() {
