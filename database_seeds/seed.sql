@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 24, 2021 at 08:28 PM
+-- Generation Time: Jan 25, 2021 at 08:32 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.0
 
@@ -105,6 +105,13 @@ CREATE TABLE `sessions` (
   `facultyNr` int(16) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `sessions`
+--
+
+INSERT INTO `sessions` (`sessionID`, `expires`, `facultyNr`) VALUES
+(81319, '2021-01-25 18:27:02', 81319);
+
 -- --------------------------------------------------------
 
 --
@@ -174,6 +181,17 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`facultyNr`, `topicNr`, `role`) VALUES
+(0, 0, 'admin'),
+(11111, 1, 'student'),
+(22222, 2, 'student'),
+(33333, 3, 'student'),
+(81319, 12, 'student');
+
+--
 -- Indexes for dumped tables
 --
 
@@ -200,7 +218,9 @@ ALTER TABLE `topic`
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`facultyNr`);
+  ADD PRIMARY KEY (`facultyNr`),
+  ADD KEY `topicNr` (`topicNr`),
+  ADD KEY `facultyNr` (`facultyNr`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -227,6 +247,12 @@ ALTER TABLE `topic`
 --
 ALTER TABLE `question`
   ADD CONSTRAINT `question_ibfk_1` FOREIGN KEY (`topic_id`) REFERENCES `topic` (`topicID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `users`
+--
+ALTER TABLE `users`
+  ADD CONSTRAINT `userTopic` FOREIGN KEY (`topicNr`) REFERENCES `topic` (`topicID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
