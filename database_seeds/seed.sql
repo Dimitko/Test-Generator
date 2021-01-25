@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 25, 2021 at 09:30 PM
+-- Generation Time: Jan 25, 2021 at 11:40 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.0
 
@@ -170,7 +170,30 @@ INSERT INTO `question_history` (`questionID`, `userID`, `answered`, `correct`, `
 (51, 81319, 'option_1', 1, 1611604910),
 (52, 81319, 'option_1', 1, 1611604910),
 (53, 81319, 'option_1', 1, 1611604910),
-(54, 81319, 'option_1', 1, 1611604910);
+(54, 81319, 'option_1', 1, 1611604910),
+(41, 81319, 'option_1', 1, 1611613811),
+(41, 0, 'option_1', 1, 1611613865),
+(41, 0, 'option_3', 0, 1611613978),
+(41, 0, 'option_1', 1, 1611614062),
+(42, 0, 'option_1', 1, 1611614062),
+(43, 0, 'option_1', 1, 1611614062),
+(44, 0, 'option_3', 0, 1611614062),
+(45, 0, 'option_3', 0, 1611614062),
+(46, 0, 'option_4', 0, 1611614062),
+(47, 0, 'option_4', 0, 1611614062),
+(48, 0, 'option_4', 0, 1611614062),
+(49, 0, 'option_4', 0, 1611614062),
+(50, 0, 'option_4', 0, 1611614062),
+(41, 0, 'option_1', 1, 1611614225),
+(42, 0, 'option_1', 1, 1611614225),
+(43, 0, '', 0, 1611614225),
+(44, 0, 'option_2', 0, 1611614225),
+(45, 0, 'option_3', 0, 1611614226),
+(46, 0, 'option_4', 0, 1611614226),
+(47, 0, 'option_2', 0, 1611614226),
+(48, 0, 'option_3', 0, 1611614226),
+(49, 0, 'option_2', 0, 1611614226),
+(50, 0, 'option_2', 0, 1611614226);
 
 -- --------------------------------------------------------
 
@@ -189,7 +212,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`sessionID`, `expires`, `facultyNr`) VALUES
-(81319, '2021-01-25 18:27:02', 81319);
+(81319, '2021-01-25 21:42:45', 81319);
 
 -- --------------------------------------------------------
 
@@ -255,7 +278,7 @@ INSERT INTO `topic` (`topicID`, `title`, `topicNumber`, `extraInfo`) VALUES
 
 CREATE TABLE `users` (
   `facultyNr` int(16) UNSIGNED NOT NULL,
-  `topicNr` int(16) UNSIGNED NOT NULL,
+  `topicID` int(16) UNSIGNED NOT NULL,
   `role` varchar(16) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -263,7 +286,7 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`facultyNr`, `topicNr`, `role`) VALUES
+INSERT INTO `users` (`facultyNr`, `topicID`, `role`) VALUES
 (0, 0, 'admin'),
 (11111, 1, 'student'),
 (22222, 2, 'student'),
@@ -306,7 +329,7 @@ ALTER TABLE `topic`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`facultyNr`),
-  ADD KEY `topicNr` (`topicNr`),
+  ADD KEY `topicNr` (`topicID`),
   ADD KEY `facultyNr` (`facultyNr`);
 
 --
@@ -341,12 +364,6 @@ ALTER TABLE `question`
 ALTER TABLE `question_history`
   ADD CONSTRAINT `questionID` FOREIGN KEY (`questionID`) REFERENCES `question` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `userID` FOREIGN KEY (`userID`) REFERENCES `users` (`facultyNr`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Constraints for table `users`
---
-ALTER TABLE `users`
-  ADD CONSTRAINT `userTopic` FOREIGN KEY (`topicNr`) REFERENCES `topic` (`topicID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

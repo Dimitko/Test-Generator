@@ -241,21 +241,17 @@ function getStatsForQuestions(test) {
 }
 
 function buildTestHTML(test, topicName, show_stats, question_statistics) {
-    console.log("Building question")
-    console.log("Test length", test.length)
     document.getElementsByClassName("form-style-2-heading")[0].innerText = "Тема " + topicName;
     document.getElementById("topic-select-form").remove()
     form = document.createElement('form')
     form.id = "topic-submit-form"
 
     for (let i = 0; i < test.length; i++) {
-        console.log("Building question i")
         if (i > 0) {
             form.appendChild(document.createElement('BR'));
             form.appendChild(document.createElement('HR'));
         }
 
-        console.log("Building question")
         if (show_stats) {
             question = test[i];
             question_id = question["id"];
@@ -304,8 +300,6 @@ function buildQuestion(idx, question, show_stats, question_statistics) {
         question_container.appendChild(radio_button);
         question_container.appendChild(label);
 
-        console.log("Building question statistics");
-
         question_container.appendChild(document.createElement("BR"));
     }
 
@@ -318,7 +312,6 @@ function buildQuestion(idx, question, show_stats, question_statistics) {
 }
 
 function buildQuestionStatistics(question_statistics) {
-    console.log(question_statistics)
     stats_paragraph = document.createElement("p");
     times_answered = question_statistics["times_answered"];
     correct_times_answered = question_statistics["correct_times_answered"];

@@ -2,6 +2,7 @@
     require("../../src/utils.php");
 
     header("Content-type: application/json");
+    session_start();
 
     $requestURL = $_SERVER["REQUEST_URI"];
 
@@ -53,6 +54,31 @@
         $result["correct_answer"] =  $correct_answer_text;
       }
 
+      updateHistory($id, $question["answer"], $is_correct);
+
       return $result;
+    }
+
+    function updateHistory($question_id, $answered, $is_correct)  {
+      if (!isset($_SESSION["faculty_number"])) {
+        error_log("Not logged in for history");
+        return;
+      }
+
+      // temporary workaround as PHP parses 0 as an empty string;
+      if ($is_correct) {
+        $is_correct = '1';
+      } else {
+        $is_correct ='0';
+      }
+
+      $fn = $_SESSION["faculty_number"];
+      $time = time();
+      $db_columns = 'questionID, userID, answered, correct, timestamp';
+      $query = "INSERT INTO question_history($db_columns) VALUES ('$question_id', '$fn', '$answered', $is_correct, '$time')";
+      error_log("QUERY");
+      error_log($query);
+      insertUpdateQuery($query);
+      error_log("Inserted in History!");
     }
 ?>
