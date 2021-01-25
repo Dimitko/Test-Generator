@@ -1,5 +1,4 @@
 checkLoggedIn();
-
 function getAllTopics() {
     fetch('http://localhost/Test-Generator/api/topic/select.php/all', {
         headers: {
