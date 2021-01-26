@@ -14,7 +14,9 @@ const loginFunction = e => {
   }).then(
     response => response.json()
   ).then(
-    response => successfulLogin(response)
+    response => {
+      successfulLogin(response)
+    }
   );
 }
 
@@ -43,10 +45,11 @@ function updateLoginPageAlreadyLoggedIn(response) {
 }
 
 function successfulLogin(response) {
+  user_faculty_number = response["faculty_number"];
+  updateNavBarLoggedIn()
   document.getElementById('login-form').hidden = true;
   document.getElementById('successfully-logged-in').innerText = document.getElementById('successfully-logged-in').innerText + response["faculty_number"]
   document.getElementById('successfully-logged-in').hidden = false;
-  updateNavBarLoggedIn()
 }
 
 (function () {

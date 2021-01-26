@@ -1,3 +1,8 @@
+// const adminPanelHTML = `<a href="/Test-Generator/pages/AdminPanel.html"> Администраторски панел</a>`;
+
+// const loginHTML = `<a id="navbar-login" href="/Test-Generator/pages/LoginForm.html">Вход <i class="fa fa-sign-in" aria-hidden="true"></i></a>`;
+// const logoutHTML = ``;
+
 const navHTML = `
     <div class="topnav">
       <a class="active" href="/Test-Generator/index.html"><i class="fa fa-fw fa-home"></i> Smile</a>
@@ -31,6 +36,14 @@ function generateNavigationBar() {
   bodyHTML = document.getElementsByTagName('body')[0].innerHTML;
   bodyHTML = navHTML + bodyHTML
   document.getElementsByTagName('body')[0].innerHTML = bodyHTML;
+}
+
+function createElementWithHTML(htmlString) {
+  var div = document.createElement('div');
+  div.innerHTML = htmlString.trim();
+
+  // Change this to div.childNodes to support multiple top-level nodes
+  return div.firstChild;а
 }
 
 (function () {

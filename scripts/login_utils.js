@@ -54,7 +54,10 @@ function updateNavBarLoggedIn() {
   navbar_login.innerText = "Изход"
   navbar_login.addEventListener('click', logout)
 
+  console.log("checking admin");
+  console.log(user_faculty_number);
   if (user_faculty_number == 0) {
+    console.log("ADMIN");
     updateNavBarAdminPanel();
   }
 

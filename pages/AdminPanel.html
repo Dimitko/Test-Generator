@@ -21,7 +21,52 @@
     </head>
     <body class="bodyclass">
         <div class="form-style-2">
-            <div class="form-style-2-heading">Добавяне на въпрос</div>
+            <div class="form-style-2-heading">Администраторски панел</div>
+            <form id="export-form">
+              <div>
+                <label for="user_question_history"><span>История с въпроси на потребител</span>
+                <input id="user_question_history" type="text" class="input-field" placeholder="Факултетен номер" /></label>
+                <input id="user_question_history_button" type="button" value="Download .CSV">
+                <hr>
+                <br>
+              </div>
+              <div>
+                <label for="user_test_history"><span>История с тестове на потребител</span>
+                <input id="user_test_history" type="text" class="input-field" placeholder="Факултетен номер" /></label>
+                <input id="user_test_history_button" type="button" value="Download .CSV">
+                <hr>
+                <br>
+              </div>
+              <div>
+                <label for="question_history_button">История с въпроси за всички потребители</label>
+                <input id="question_history_button" type="button" value="Download .CSV">
+                <hr>
+                <br>
+              </div>
+              <div>
+                <label for="topics"><span>Всички теми</span>
+                <input id="topics_button" type="button" value="Download .CSV">
+                <hr>
+                <br>
+              </div>
+              <div>
+                <label for="title"><span>Всички въпроси за дадена тема</span>
+                <label for="topic-select">
+                    <span>Тема</span>
+                    <span class="required"></span>
+                    <select id="topic-select" class="select-field"></select>
+                </label>
+                <input id="topic_questions_button" type="button" value="Download .CSV">
+                <hr>
+                <br>
+              </div>
+              <div>
+                <label for="users_button"><span>Всички потребители</span>
+                <input id="users_button" type="button" value="Download .CSV">
+                <hr>
+                <br>
+              </div>
+          </form>
         </div>
     </body>
 </html>
