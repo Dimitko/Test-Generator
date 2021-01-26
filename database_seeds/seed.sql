@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.0.3
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Jan 26, 2021 at 09:01 PM
--- Server version: 10.4.17-MariaDB
--- PHP Version: 8.0.0
+-- Host: 127.0.0.1
+-- Generation Time: Jan 26, 2021 at 11:37 PM
+-- Server version: 10.4.14-MariaDB
+-- PHP Version: 7.4.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -265,7 +265,26 @@ INSERT INTO `question_history` (`questionID`, `userID`, `answered`, `correct`, `
 (75, 0, '', 0, 1611691048),
 (81, 0, '', 0, 1611691048),
 (82, 0, '', 0, 1611691048),
-(96, 0, 'option_1', 1, 1611691048);
+(96, 0, 'option_1', 1, 1611691048),
+(7, 80995, 'option_3', 0, 1611699930),
+(10, 80995, 'option_2', 0, 1611699930),
+(22, 80995, 'option_1', 1, 1611699930),
+(23, 80995, 'option_2', 0, 1611700311),
+(24, 80995, 'option_1', 0, 1611700311),
+(23, 81271, 'option_1', 1, 1611700466),
+(24, 81271, 'option_1', 0, 1611700466),
+(2, 0, 'option_1', 1, 1611700516),
+(3, 0, 'option_2', 0, 1611700516),
+(4, 0, 'option_2', 0, 1611700516),
+(5, 0, 'option_2', 0, 1611700516),
+(6, 0, 'option_1', 1, 1611700516),
+(8, 0, 'option_2', 0, 1611700516),
+(9, 0, 'option_1', 1, 1611700516),
+(11, 0, 'option_2', 0, 1611700516),
+(12, 0, 'option_3', 0, 1611700516),
+(13, 0, 'option_1', 1, 1611700516),
+(23, 0, 'option_1', 1, 1611700597),
+(24, 0, 'option_2', 0, 1611700597);
 
 -- --------------------------------------------------------
 
@@ -284,7 +303,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`sessionID`, `expires`, `facultyNr`) VALUES
-(0, '2021-01-26 19:02:18', 0),
+(81271, '2021-01-26 21:30:49', 81271),
 (81319, '2021-01-26 16:19:05', 81319);
 
 -- --------------------------------------------------------
@@ -365,6 +384,8 @@ INSERT INTO `users` (`facultyNr`, `topicID`, `role`) VALUES
 (22222, 2, 'student'),
 (33333, 3, 'student'),
 (44444, 15, 'student'),
+(80995, 5, 'student'),
+(81271, 10, 'student'),
 (81319, 12, 'student');
 
 --
