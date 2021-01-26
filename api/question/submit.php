@@ -86,6 +86,11 @@
         VALUES(now(), '$fn', '$topic_id', '$question_nr', '$aim', '$question_text',
         '$option_1', '$option_2', '$option_3', '$option_4', '$answer',
         '$difficulty', '$feedback_correct', '$feedback_incorrect', '$notes', '$type')";
+
+        error_log("======");
+        error_log($sql);
+        error_log("======");
+
         $result = insertUpdateQuery($sql);
 
         if($result){

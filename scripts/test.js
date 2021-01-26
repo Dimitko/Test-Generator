@@ -275,16 +275,34 @@ function buildTestHTML(test, topicName, show_stats, question_statistics) {
     document.getElementsByClassName("form-style-2")[0].appendChild(form);
 }
 
+function normalizeQuestionStats(question_statistics) {
+    normalized =  {
+        "times_answered": question_statistics["times_answered"],
+        "option_1": (question_statistics["option_1"] / question_statistics["times_answered"]) * 100,
+        "option_2": (question_statistics["option_2"] / question_statistics["times_answered"]) * 100,
+        "option_3": (question_statistics["option_3"] / question_statistics["times_answered"]) * 100,
+        "option_4": (question_statistics["option_4"] / question_statistics["times_answered"]) * 100,
+        "correct_times_answered": (question_statistics["correct_times_answered"] / question_statistics["times_answered"]) * 100
+    }
+
+    console.log(normalized);
+    return normalized;
+}
+
 function buildQuestion(idx, question, show_stats, question_statistics) {
+    normalized_question_stats = normalizeQuestionStats(question_statistics);
+
     question_container = document.createElement("div");
     question_container.id = "question-" + idx + "-container";
     question_container.classList.add("question_container");
-    question_text = buildQuestionText(question);
+    question_text = buildQuestionText(question, normalized_question_stats);
     question_container.appendChild(question_text);
 
+
+
     for (let i = 0; i < 4; i++) {
-        option = "option_" + (i + 1);
-        option_text = question[option];
+        var option = "option_" + (i + 1);
+        var option_text = question[option];
 
         radio_button = document.createElement("input");
         radio_button.type = "radio";
@@ -297,8 +315,15 @@ function buildQuestion(idx, question, show_stats, question_statistics) {
         label.htmlFor = radio_button.id;
         label.innerText = question[option];
 
+
+
         question_container.appendChild(radio_button);
         question_container.appendChild(label);
+
+        if (!Number.isNaN(normalized_question_stats[option])) {
+            option_stats_element = buildOptionStats(option, normalized_question_stats)
+            question_container.appendChild(option_stats_element);
+        }
 
         question_container.appendChild(document.createElement("BR"));
     }
@@ -309,6 +334,14 @@ function buildQuestion(idx, question, show_stats, question_statistics) {
     }
 
     return question_container;
+}
+
+function buildOptionStats(option, question_statistics) {
+    opt_stats = document.createElement("text");
+    opt_stats.innerText = `(${question_statistics[option].toFixed(2)}%)`;
+    opt_stats.style.color = "gray";
+    opt_stats.style.opacity = 0.5;
+    return opt_stats
 }
 
 function buildQuestionStatistics(question_statistics) {
@@ -331,12 +364,19 @@ function buildQuestionStatistics(question_statistics) {
     return stats_paragraph;
 }
 
-function buildQuestionText(question) {
+function buildQuestionText(question, question_statistics) {
     question_paragraph = document.createElement('p');
     question_paragraph.id = question["id"];
 
     question_text = document.createElement("h2");
     question_text.innerText = question["question_text"];
+
+    qs = document.createElement("text");
+    qs.innerText = `  (${question_statistics['times_answered']})`;
+    qs.style.color = "gray";
+    qs.style.opacity = 0.5;
+    question_text.appendChild(qs);
+
     question_paragraph.appendChild(question_text);
 
     return question_paragraph;
