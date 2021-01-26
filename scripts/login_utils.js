@@ -54,10 +54,7 @@ function updateNavBarLoggedIn() {
   navbar_login.innerText = "Изход"
   navbar_login.addEventListener('click', logout)
 
-  console.log("checking admin");
-  console.log(user_faculty_number);
   if (user_faculty_number == 0) {
-    console.log("ADMIN");
     updateNavBarAdminPanel();
   }
 
@@ -65,7 +62,6 @@ function updateNavBarLoggedIn() {
 
 function updateNavBarAdminPanel() {
   navbar_conditions = document.getElementById("conditions-link");
-  console.log(navbar_conditions);
   admin_panel_link = document.createElement("a");
   admin_panel_link.href = "http://localhost/Test-Generator/pages/AdminPanel.html";
   admin_panel_link.innerText = 'Администраторски панел';
