@@ -18,8 +18,9 @@ const navHTML = `
       <a href="/Test-Generator/pages/Test.html"><i class="fa fa-puzzle-piece" aria-hidden="true"></i> Започване на тест</a>
       <a id="conditions-link" href="/Test-Generator/pages/Conditions.html"><i class="fa fa-handshake-o" aria-hidden="true"></i> Общи условия</a>
       <div class="topnav-right">
+          <a id="user-data"><a/>
           <a id="navbar-login" href="/Test-Generator/pages/LoginForm.html">Вход <i class="fa fa-sign-in" aria-hidden="true"></i></a>
-          <div class="dropdown">
+          <div class="dropdown" id="register-menu">
               <button class="dropbtn"><i class="fa fa-user-circle-o" aria-hidden="true"></i> Регистрация
               <i class="fa fa-caret-down"></i>
               </button>

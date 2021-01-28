@@ -25,10 +25,16 @@
             <form id="login-form">
                 <label for="faculty-number"><span>Факултетен номер</span><span class="required">*</span>
                 <input id="faculty-number" name="faculty-number" type="text" class="input-field" placeholder="Въведете факултетен номер" /></label>
+
+                <label for="user-key"><span>Потребителски ключ</span><span class="required">*</span>
+                <input id="user-key" name="user-key" type="password" class="input-field" placeholder="Въведете потребителски ключ" /></label>
+                
                 <label><span></span><span></span><input id="login-button" type="submit" value="Вход" ></input></label>
             </form>
             <div id="already-logged-in" hidden="true">Вече сте логнати с факултетен номер: </div>
             <div id="successfully-logged-in" hidden="true">Успешно се логнахте с факултетен номер: </div>
+            <div id="login-response"></div>
+            <div id="error-login"></div>
         </div>
     </body>
 </html>

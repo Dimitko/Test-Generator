@@ -54,6 +54,8 @@ function updateNavBarLoggedIn() {
   navbar_login.innerText = "Изход"
   navbar_login.addEventListener('click', logout)
 
+  document.getElementById("register-menu").hidden = true;
+
   if (user_faculty_number == 0) {
     updateNavBarAdminPanel();
   }

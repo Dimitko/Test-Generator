@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 26, 2021 at 11:37 PM
+-- Generation Time: Jan 28, 2021 at 03:50 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.11
 
@@ -303,8 +303,22 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`sessionID`, `expires`, `facultyNr`) VALUES
-(81271, '2021-01-26 21:30:49', 81271),
-(81319, '2021-01-26 16:19:05', 81319);
+(0, '2021-01-27 06:29:39', 0),
+(81319, '2021-01-28 11:23:37', 81319);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `test_history`
+--
+
+CREATE TABLE `test_history` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `topic_id` int(11) NOT NULL,
+  `timestamp` datetime DEFAULT NULL,
+  `score` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -371,22 +385,32 @@ INSERT INTO `topic` (`topicID`, `title`, `topicNumber`, `extraInfo`) VALUES
 CREATE TABLE `users` (
   `facultyNr` int(16) UNSIGNED NOT NULL,
   `topicID` int(16) UNSIGNED NOT NULL,
-  `role` varchar(16) NOT NULL
+  `role` varchar(16) NOT NULL,
+  `user_key` int(11) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`facultyNr`, `topicID`, `role`) VALUES
-(0, 0, 'admin'),
-(11111, 1, 'student'),
-(22222, 2, 'student'),
-(33333, 3, 'student'),
-(44444, 15, 'student'),
-(80995, 5, 'student'),
-(81271, 10, 'student'),
-(81319, 12, 'student');
+INSERT INTO `users` (`facultyNr`, `topicID`, `role`, `user_key`) VALUES
+(0, 0, 'admin', 1111),
+(11111, 1, 'student', 2347),
+(22222, 2, 'student', 1444),
+(33333, 3, 'student', 9287),
+(44444, 15, 'student', 5647),
+(80995, 5, 'student', 1478),
+(81271, 10, 'student', 2346),
+(81319, 12, 'student', 4578),
+(81476, 16, 'student', 1647),
+(81638, 9, 'student', 6234),
+(81749, 15, 'student', 5124),
+(82007, 13, 'student', 4159),
+(82346, 23, 'student', 6547),
+(84125, 0, 'student', 1564),
+(84517, 2, 'student', 2397),
+(85647, 23, 'student', 1245),
+(86234, 0, 'student', 4123);
 
 --
 -- Indexes for dumped tables
@@ -413,6 +437,12 @@ ALTER TABLE `sessions`
   ADD PRIMARY KEY (`sessionID`);
 
 --
+-- Indexes for table `test_history`
+--
+ALTER TABLE `test_history`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `topic`
 --
 ALTER TABLE `topic`
@@ -435,6 +465,12 @@ ALTER TABLE `users`
 --
 ALTER TABLE `question`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=98;
+
+--
+-- AUTO_INCREMENT for table `test_history`
+--
+ALTER TABLE `test_history`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `topic`

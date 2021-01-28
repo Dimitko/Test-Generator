@@ -13,6 +13,7 @@
         <link href="../styles/FormStyling.css" rel="stylesheet"></link>
 
         <script type="text/javascript" src="/Test-Generator/scripts/navigation_bar.js" defer></script>
+        <script type="text/javascript" src="/Test-Generator/scripts/register.js" defer></script>
         <script type="text/javascript" src="/Test-Generator/scripts/login_utils.js" defer></script>
 
         <title>Регистрация</title>
@@ -23,30 +24,27 @@
             <div class="form-style-2-heading">Регистрация</div>
             <p><h2><strong>Общите условия може да прочетете <a href="Conditions.html">тук</a></strong></h2></p>
             <br />
-            <form action="my_test.php" method="post">
-                <label for="username"><span>Потребителско име</span><span class="required">*</span>
-                <input id="username" name="username" type="text" class="input-field" placeholder="Въведете потребителско име" /></label>
+            <form>
+                <!-- <label for="username"><span>Потребителско име</span><span class="required">*</span>
+                <input id="username" name="username" type="text" class="input-field" placeholder="Въведете потребителското си име от Puffin" /></label> -->
 
-                <label for="password"><span>Парола</span><span class="required">*</span>
-                <input id="password" name="password" type="text" class="input-field" placeholder="Въведете парола от минимум шест символа" /></label>
-
-                <label for="passwordRepeat"><span>Парола</span><span class="required">*</span>
+                <!-- <label for="passwordRepeat"><span>Парола</span><span class="required">*</span>
                 <input id="passwordRepeat" name="passwordRepeat" type="text" class="input-field" placeholder="Повторете парола" /></label>
 
                 <label for="name"><span>Три имена</span><span class="required">*</span>
-                <input id="name" name="name" type="text" class="input-field" placeholder="Въведете три имена" /></label>
+                <input id="name" name="name" type="text" class="input-field" placeholder="Въведете три имена" /></label> -->
 
-                <label for="role"><span>Роля</span><span class="required">*</span>
-                    <select id="role" name="role" class="select-field">
-                    <option value="1">Лектор</option>
-                    <option value="2">Асистент</option>
-                    </select>
-                </label>
+                <label for="faculty-number"><span>Факултетен номер</span><span class="required">*</span>
+                <input id="faculty-number" name="faculty-number" type="text" class="input-field" placeholder="Въведете факултетен номер" /></label>
 
-                <label for="email"><span>E-mail</span><span class="required">*</span>
-                <input id="email" name="email" type="email" class="input-field" placeholder="Въведете e-mail, който използвате" /></label>
+                <label for="user-key"><span>Потребителски ключ</span><span class="required">*</span>
+                <input id="user-key" name="user-key" type="password" class="input-field" placeholder="Въведете четирицифрен потребителски ключ" /></label>
+
+                <!-- <label for="email"><span>E-mail</span><span class="required">*</span>
+                <input id="email" name="email" type="email" class="input-field" placeholder="Въведете e-mail, който използвате" /></label> -->
                 <br />
-                <label><span></span><span></span><input id="Register" type="submit" value="Запиши" ></input></label>
+                <label><span></span><span></span><input id="register-button" type="submit" value="Регистрирай ме" ></input></label>
+                <div id="register-submit-response"></div>
             </form>
         </div>
     </body>

@@ -103,6 +103,12 @@ function clearSessions($faculty_number) {
   insertUpdateQuery($query);
 }
 
+function testInput($input) {
+  $input = trim($input);
+  $input = htmlspecialchars($input);
+  $input = stripslashes($input);
 
+  return $input;
+}
 
 ?>
