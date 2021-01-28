@@ -202,6 +202,7 @@ function generateTestForTopic(topicNumber, topicName, testType) {
                 test_response => test_response.json()
             ).then(
                 test => {
+                    console.log(test);
                     getStatsForQuestions(test, show_stats).then(
                         questions_statistics_array => {
                             questions_statistics = {}
@@ -290,12 +291,16 @@ function normalizeQuestionStats(question_statistics) {
 }
 
 function buildQuestion(idx, question, show_stats, question_statistics) {
-    normalized_question_stats = normalizeQuestionStats(question_statistics);
+    var normalized_question_stats;
+    if (show_stats) {
+        normalized_question_stats = normalizeQuestionStats(question_statistics);
+    }
+
 
     question_container = document.createElement("div");
     question_container.id = "question-" + idx + "-container";
     question_container.classList.add("question_container");
-    question_text = buildQuestionText(question, normalized_question_stats);
+    question_text = buildQuestionText(question, show_stats, normalized_question_stats);
     question_container.appendChild(question_text);
 
 
@@ -303,6 +308,8 @@ function buildQuestion(idx, question, show_stats, question_statistics) {
     for (let i = 0; i < 4; i++) {
         var option = "option_" + (i + 1);
         var option_text = question[option];
+
+        console.log("questions");
 
         radio_button = document.createElement("input");
         radio_button.type = "radio";
@@ -320,7 +327,7 @@ function buildQuestion(idx, question, show_stats, question_statistics) {
         question_container.appendChild(radio_button);
         question_container.appendChild(label);
 
-        if (!Number.isNaN(normalized_question_stats[option])) {
+        if (show_stats && !Number.isNaN(normalized_question_stats[option])) {
             option_stats_element = buildOptionStats(option, normalized_question_stats)
             question_container.appendChild(option_stats_element);
         }
@@ -364,18 +371,22 @@ function buildQuestionStatistics(question_statistics) {
     return stats_paragraph;
 }
 
-function buildQuestionText(question, question_statistics) {
+function buildQuestionText(question, show_stats, question_statistics) {
     question_paragraph = document.createElement('p');
     question_paragraph.id = question["id"];
 
     question_text = document.createElement("h2");
     question_text.innerText = question["question_text"];
 
-    qs = document.createElement("text");
-    qs.innerText = `  (${question_statistics['times_answered']})`;
-    qs.style.color = "gray";
-    qs.style.opacity = 0.5;
-    question_text.appendChild(qs);
+    if (show_stats) {
+        qs = document.createElement("text");
+        qs.innerText = `  (${question_statistics['times_answered']})`;
+        qs.style.color = "gray";
+        qs.style.opacity = 0.5;
+        question_text.appendChild(qs);
+    }
+
+
 
     question_paragraph.appendChild(question_text);
 
