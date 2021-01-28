@@ -1,5 +1,26 @@
 checkLoggedIn();
 
+function getAllTopics() {
+  fetch('http://localhost/Test-Generator/api/topic/select.php/all', {
+      headers: {
+          'Content-Type': 'application/json'
+      }
+  }).then(
+      response => response.json()
+  ).then(
+      response => listTopics(response)
+  );
+}
+
+function listTopics(response) {
+  response.forEach(topic => {
+      let options = document.createElement('option');
+      options.text = topic['topicNumber'] + ' - ' + topic['title'];
+      options.value = topic['topicNumber'];
+      document.getElementById("topic-select").appendChild(options);
+  })
+}
+
 const submitQuestion = e => {
   e.preventDefault();
   question_data = {
@@ -36,17 +57,41 @@ const submitQuestion = e => {
 const importQuestion = e => {
   e.preventDefault();
 
+  document.getElementById("response-container").innerHTML =""
+
   var fileUpload = document.getElementById("file-upload");
+  if (fileUpload.files[0] == undefined) {
+    // The user is clicking the button but has not selected anything.
+    return
+  }
+
   questions = "Hello";
   config = {
     complete: function (result, file) {
       questions = result['data'];
+
+      allPromises = [];
+
       for (let i = 1; i < questions.length; i++) {
-        console.log(questionToJSON(questions[i]));
-        sendQuestion(questionToJSON(questions[i]));
+        allPromises.push(sendQuestion(questionToJSON(questions[i])));
       }
+
+      Promise.all(allPromises).then(
+        response => response.every(e => e)
+      ).then(
+        allWereSuccessful => {
+          if (allWereSuccessful) {
+            succes_element = document.createElement("text");
+            succes_element.innerText = `Успешно импортирахте всички въпроси!`
+            succes_element.style.color = "green";
+
+            document.getElementById("response-container").appendChild(succes_element)
+          }
+        }
+      )
     }
   }
+
   Papa.parse(fileUpload.files[0], config);
 }
 
@@ -72,24 +117,34 @@ function questionToJSON(question) {
 }
 
 function sendQuestion(question) {
-  fetch('http://localhost/Test-Generator/api/question/submit.php', {
+  return fetch('http://localhost/Test-Generator/api/question/submit.php', {
     method: 'POST',
     headers: {
         'Content-Type': 'application/json'
     },
     body: JSON.stringify(question)
     }).then(
-    response => response.json()
+      response => response.json()
     ).then(
-      response => console.log(response)
-    )
+      response => {
+        if (response["success"] == "false") {
+          error_element = document.createElement("text");
+          error_element.innerText = `Възникна грешка при импортиране на въпрос с номер ${question["question_nr"]}`
+          error_element.style.color = "red";
+
+          document.getElementById("response-container").appendChild(error_element)
+          document.getElementById("response-container").appendChild(document.createElement("br"))
+          return false;
+        }
+
+        return true;
+      }
+  )
 }
 
 function parseResponse(response) {
 
 success = response["success"];
-console.log("success");
-console.log(success);
 color = "red";
   if (success) {
     cleanQuestionSubmitForm();
@@ -119,9 +174,33 @@ function cleanQuestionSubmitForm() {
   document.getElementById('type').value = "";
 }
 
+
 (function () {
+  getAllTopics();
+  document.getElementById('difficulty-number').innerText = 5;
+  document.getElementById('difficulty-number').style.fontSize = "4em";
+  document.getElementById('difficulty-number').style.color = "blue"
+
   document.getElementById('question-submit').addEventListener('click', submitQuestion);
   document.getElementById('question-import').addEventListener('click', importQuestion);
+  document.getElementById('difficulty').addEventListener('input', e => {
+    difficulty_value = document.getElementById('difficulty').value;
+    color = "green";
+    if (difficulty_value <= 3) {
+      color = "green"
+    } else if (difficulty_value < 6) {
+      color = "blue"
+    } else if (difficulty_value < 8) {
+      color = "orange"
+    } else {
+      color = "red"
+    }
+
+    document.getElementById('difficulty-number').innerText = document.getElementById('difficulty').value;
+    document.getElementById('difficulty-number').style.fontSize = "4em";
+    document.getElementById('difficulty-number').style.color = color
+
+  });
 })();
 
 // (function () {

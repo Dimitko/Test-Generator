@@ -67,7 +67,6 @@ document.getElementById("question_history_button").addEventListener('click', e =
 
 document.getElementById("user_question_history_button").addEventListener('click', e => {
   faculty_number = document.getElementById("user_question_history").value;
-  console.log("FACULTY NUMBER", faculty_number)
 
   var filename;
   fetch('http://localhost/Test-Generator/api/admin/export.php', {
@@ -99,8 +98,6 @@ document.getElementById("topic_questions_button").addEventListener('click', e =>
   topicNumber = topicSelectEl.value;
   topicIndex = topicSelectEl.selectedIndex;
   topicName = topicSelectEl.options[topicIndex].text;
-
-  console.log(topicNumber)
 
   fetch('http://localhost/Test-Generator/api/admin/export.php', {
     method: 'POST',

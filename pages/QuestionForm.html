@@ -30,15 +30,23 @@
             <input type="file" id="file-upload" />
             <!-- <input type="button" id="question-import" value="import CSV" /> -->
 
+            <br>
+            <br>
+            <div id="response-container"></div>
+
             <br />
-            <br />
+
+
             <hr>
             <h3> Добавяне на ръка </h3>
 
 
             <form>
-                <label for="topic_id"><span>Номер на тема</span><span class="required">*</span>
-                <input id="topic_id" name="topic_id" type="text" class="input-field"  placeholder="Номер в Puffin" /></label>
+                <label for="topic-select">
+                    <span>Тема</span>
+                    <span class="required"></span>
+                    <select id="topic-select" class="select-field"></select>
+                </label>
 
                 <br />
 
@@ -57,8 +65,13 @@
 
                 <br />
 
-                <label for="difficulty"><span>Ниво на трудност</span><span class="required">*</span>
-                <input id="difficulty" name="difficulty" type="text" class="input-field" placeholder="Число от 1 до 10"/></label>
+                <div id="difficulty-container">
+                    <label for="difficulty"><span>Ниво на трудност</span><span class="required">*</span>
+                    <p id="difficulty-number"></p>
+                    <input id="difficulty" type="range" class="input-field" placeholder="Число от 1 до 10" name="difficulty" min="1" max="10">
+
+                </div>
+
 
                 <br />
                 <br />

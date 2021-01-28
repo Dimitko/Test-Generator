@@ -21,7 +21,7 @@ const registerFunction = e => {
         topic_number = '0';
         role = 'admin';
     } else if(faculty_number.length > 2) {
-        topic_number = document.getElementById("topic-number").value;
+        topic_number = document.getElementById("topic-select").value;
     }
     user_key = document.getElementById("user-key").value;
 
@@ -44,7 +44,7 @@ const registerFunction = e => {
                 registerSubmitResponse = document.getElementById("register-submit-response");
                 registerSubmitResponse.innerHTML += '<br />' + message;
                 registerSubmitResponse.style = "font-size:10px;color:" + color
-        
+
                 window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })
             }
         }
@@ -60,7 +60,7 @@ const registerFunction = e => {
                 registerSubmitResponse = document.getElementById("register-submit-response");
                 registerSubmitResponse.innerHTML += '<br />' + message;
                 registerSubmitResponse.style = "font-size:10px;color:" + color
-        
+
                 window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })
             }
         } else {
@@ -70,7 +70,7 @@ const registerFunction = e => {
             registerSubmitResponse = document.getElementById("register-submit-response");
             registerSubmitResponse.innerHTML += '<br />' + message;
             registerSubmitResponse.style = "font-size:10px;color:" + color
-    
+
             window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })
         }
     }
@@ -84,7 +84,7 @@ const registerFunction = e => {
             registerSubmitResponse = document.getElementById("register-submit-response");
             registerSubmitResponse.innerHTML += '<br />' + message;
             registerSubmitResponse.style = "font-size:10px;color:" + color
-    
+
             window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })
         }
     } else {
@@ -105,12 +105,10 @@ const registerFunction = e => {
             "user_key": user_key,
             "role": role
         }
-    
-        console.log(user);
-    
+
         getAllUsers(user);
     }
-    
+
     clearRegisterUserForm();
   }
 
@@ -122,7 +120,7 @@ function checkUserExists(users, user) {
             registerSubmitResponse = document.getElementById("register-submit-response");
             registerSubmitResponse.innerHTML += '<br />' + message;
             registerSubmitResponse.style = "font-size:10px;color:" + color
-    
+
             window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })
             return;
         }
@@ -137,7 +135,7 @@ function checkUserExists(users, user) {
         response => response.json()
         ).then(
           response => handleResponse(response)
-        ) 
+        )
 }
 
 function handleResponse(response) {
@@ -157,12 +155,37 @@ function handleResponse(response) {
 function clearRegisterUserForm() {
 faculty_number = document.getElementById("faculty-number").value;
 if (faculty_number.length > 2) {
-    topic_number= document.getElementById("topic-number").value = "";
-} 
+    topic_number= document.getElementById("topic-select").value = "";
+}
 document.getElementById("faculty-number").value = "";
 document.getElementById("user-key").value = "";
-}  
+}
+
+function getAllTopics() {
+    fetch('http://localhost/Test-Generator/api/topic/select.php/all', {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then(
+        response => response.json()
+    ).then(
+        response => listTopics(response)
+    );
+}
+
+function listTopics(response) {
+    response.forEach(topic => {
+        let options = document.createElement('option');
+        options.text = topic['topicNumber'] + ' - ' + topic['title'];
+        options.value = topic['topicNumber'];
+        document.getElementById("topic-select").appendChild(options);
+    })
+}
 
 (function () {
+    if (window.location.href.includes("Test-Generator/pages/RegisterStudentsForm.html")) {
+        getAllTopics();
+    }
+
     document.getElementById('register-button').addEventListener('click', registerFunction);
   })();

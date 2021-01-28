@@ -1,0 +1,16 @@
+"id","timestamp","fn","topic_id","question_nr","aim","question_text","option_1","option_2","option_3","option_4","answer","difficulty","feedback_correct","feedback_incorrect","notes","type"
+"1","2013-04-02 12:12:26","9999","0","1","Да провери колко време отнема писането на реферат по WWW.","Колко време според вас отнема писането на реферат по WWW технологии?","20+ часа","10 часа","5 часа","1 час","1","5","Браво! Наистина времето за писане на един реферат е между 20 и 30 часа. Виж информацията в мудъл за разпределението по часове.","Далече от истината! Времето за писане на един реферат е между 20 и 30 часа. Виж информацията в мудъл за разпределението по часове.","Виж: http://moodle.le.tsdoit.org/pluginfile.php/842/mod_forum/attachment/139/wwwTech_Evaluation_Instructions_v3.pdf",NULL
+"17","2020-11-21 11:04:32","81271","0","4","Callback функции ","      В дадения по-долу фрагмент от програмен код какво трябва да пише на мястото на '?' в случай на успех, тоест каква стойност трябва да има req.status?
+function getFile(myCallback) {
+        let req = new XMLHttpRequest();
+        req.open('GET', ""mycar.html"");
+        req.onload = function() {
+          if (req.status == ?) {
+            myCallback(this.responseText);
+          } else {
+            myCallback(""Error: "" + req.status);
+          }
+        }
+        req.send();
+      }","200","100","20","1","1","3","Отлично! За повече информация виж секция ""Callback функции"" на реферата.","Не е така! За повече информация виж секция ""Callback функции"" на реферата.","https://blog.avenuecode.com/callback-hell-promises-and-async/await","3"
+"23","2020-11-26 18:01:08","81271","0","9","FETCH API and JQuery","Кое не е част от разликите между Fetch API и jQuery.ajax()?","Дори и при използването на по-стари версии на браузърите, не е необходимо да мислим за включването на "" credentials: 'same-origin' ""","Възможно е установяването на cross-site сесия с използването на fetch(). fetch() може да получава cross-site бисквитки","fetch() ще изпрати бисквинките само ако "" credentials: 'same-origin' "" е set-нато","Promise обектът, върнат от fetch(), не би отхвърлил HTTP error status дори ако отговорът е HTTP 404 или 500, ще приключи нормално с ok стаус, set-нат на false","1","4","Отлично! За повече информация по темата виж секция ""Fetch API ""на реферата.","Не е така! За повече информация по темата виж секция ""Fetch API"" на реферата.","https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API","2"

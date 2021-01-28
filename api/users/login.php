@@ -49,7 +49,7 @@
       // Clear old sessions that have expired but are still in the DB.
       clearSessions($faculty_number);
 
-      $expires = time() + 60 * 5;
+      $expires = time() + 60 * 20;
       $timestamp = date("Y-m-d H:i:s", $expires);
 
       $query = "INSERT INTO sessions(sessionID, facultyNr, expires) VALUES ('$faculty_number', '$faculty_number', '$timestamp')";

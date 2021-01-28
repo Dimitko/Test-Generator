@@ -202,7 +202,6 @@ function generateTestForTopic(topicNumber, topicName, testType) {
                 test_response => test_response.json()
             ).then(
                 test => {
-                    console.log(test);
                     getStatsForQuestions(test, show_stats).then(
                         questions_statistics_array => {
                             questions_statistics = {}
@@ -286,7 +285,6 @@ function normalizeQuestionStats(question_statistics) {
         "correct_times_answered": (question_statistics["correct_times_answered"] / question_statistics["times_answered"]) * 100
     }
 
-    console.log(normalized);
     return normalized;
 }
 
@@ -308,8 +306,6 @@ function buildQuestion(idx, question, show_stats, question_statistics) {
     for (let i = 0; i < 4; i++) {
         var option = "option_" + (i + 1);
         var option_text = question[option];
-
-        console.log("questions");
 
         radio_button = document.createElement("input");
         radio_button.type = "radio";

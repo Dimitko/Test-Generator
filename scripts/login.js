@@ -67,22 +67,21 @@ function updateLoginPageAlreadyLoggedIn(response) {
     document.getElementById('login-form').hidden = true;
     document.getElementById('already-logged-in').innerText = document.getElementById('already-logged-in').innerText + response["faculty_number"]
     document.getElementById('already-logged-in').hidden = false;
-    updateNavBarLoggedIn()
+    updateNavBarLoggedIn(response["faculty_number"], response["topicNumber"])
   }
 }
 
 function successfulLogin(response) {
   if (response.success == "false") {
-    error_login = document.getElementById('error-login').innerText = response.msg;
+    error_login = document.getElementById('error-login')
+    error_login.innerText = response.msg;
+    error_login.style.color = "red"
   } else {
-    console.log('User_key true?: ');
-    console.log(response['res']);
-    user_faculty_number = response["faculty_number"];
-    updateNavBarLoggedIn()
+    error_login = document.getElementById('error-login').innerHTML = ""
+    updateNavBarLoggedIn(response["faculty_number"], response["topicNumber"])
     document.getElementById('login-form').hidden = true;
     document.getElementById('successfully-logged-in').innerText = document.getElementById('successfully-logged-in').innerText + response["faculty_number"];
     document.getElementById('successfully-logged-in').hidden = false;
-    document.getElementById('user-data').innerText = 'Фак. номер ' + user_faculty_number + '  Тема ' + response["topicNumber"];  
   }
   clearLoginForm();
 }
@@ -90,7 +89,7 @@ function successfulLogin(response) {
 function clearLoginForm() {
   faculty_number = document.getElementById("faculty-number").value = "";
   document.getElementById("user-key").value = "";
-  }  
+  }
 
 (function () {
   document.getElementById('login-button').addEventListener('click', loginFunction);

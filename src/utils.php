@@ -20,7 +20,7 @@ function executeDBQuery($query) {
 
   } catch(PDOException $e) {
       $message = $e->getMessage();
-      echo $message;
+      error_log($message);
       throw $e;
   }
 }
@@ -47,7 +47,8 @@ function insertUpdateQuery($query) {
   }
   catch(PDOException $e) {
         $message = $e->getMessage();
-        echo $message;
+        error_log($message);
+
         throw $e;
   }
 }

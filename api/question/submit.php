@@ -6,11 +6,20 @@
     $requestURL = $_SERVER["REQUEST_URI"];
 
     function handleSubmitQuestion(){
-        $request = parseRequest();
+        try {
+            $request = parseRequest();
 
-        $response = submitQuestion($request);
+            $response = submitQuestion($request);
 
-        echo json_encode($response);
+            echo json_encode($response);
+
+          } catch(Exception $e) {
+              $response = [
+                  "success" => "false",
+                  "msg" => "server encountered an error",
+              ];
+             echo json_encode($response);
+          }
     }
 
     handleSubmitQuestion();
@@ -86,10 +95,6 @@
         VALUES(now(), '$fn', '$topic_id', '$question_nr', '$aim', '$question_text',
         '$option_1', '$option_2', '$option_3', '$option_4', '$answer',
         '$difficulty', '$feedback_correct', '$feedback_incorrect', '$notes', '$type')";
-
-        error_log("======");
-        error_log($sql);
-        error_log("======");
 
         $result = insertUpdateQuery($sql);
 
