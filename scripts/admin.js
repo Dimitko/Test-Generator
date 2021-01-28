@@ -65,6 +65,31 @@ document.getElementById("question_history_button").addEventListener('click', e =
   )
 });
 
+document.getElementById("test_history_button").addEventListener('click', e => {
+  var filename;
+  fetch('http://localhost/Test-Generator/api/admin/export.php', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ "data": "test_history" })
+  }).then(async res => ({
+    filename: fnGetFileNameFromContentDispostionHeader(res.headers.get('content-disposition')),
+    blob: await res.blob()
+  })).then(
+    result => {
+      filename = result.filename;
+      blob = result.blob;
+
+      var objURL = window.URL.createObjectURL(blob);
+      let link = document.createElement('a');
+      link.href = objURL;
+      link.download = filename;
+      link.click();
+    }
+  )
+});
+
 document.getElementById("user_question_history_button").addEventListener('click', e => {
   faculty_number = document.getElementById("user_question_history").value;
 
@@ -91,6 +116,34 @@ document.getElementById("user_question_history_button").addEventListener('click'
     }
   )
 });
+
+document.getElementById("user_test_history_button").addEventListener('click', e => {
+  faculty_number = document.getElementById("user_test_history").value;
+
+  var filename;
+  fetch('http://localhost/Test-Generator/api/admin/export.php', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ "data": "user_test_history", "faculty_number": faculty_number })
+  }).then(async res => ({
+    filename: fnGetFileNameFromContentDispostionHeader(res.headers.get('Content-Disposition')),
+    blob: await res.blob()
+  })).then(
+    result => {
+      filename = result.filename;
+      blob = result.blob;
+
+      var objURL = window.URL.createObjectURL(blob);
+      let link = document.createElement('a');
+      link.href = objURL;
+      link.download = filename;
+      link.click();
+    }
+  )
+});
+
 
 
 document.getElementById("topic_questions_button").addEventListener('click', e => {

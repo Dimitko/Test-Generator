@@ -17,8 +17,9 @@
         switch ($request["data"]) {
             case "user_question_history":
                 exportUserQuestionHistory($request);
+                break;
             case "user_test_history":
-                echo "UNFINISHED";
+                exportUserTestHistory($request);
                 break;
             case "users":
                 exportAllUsers();
@@ -26,8 +27,8 @@
             case "question_history":
                 exportQuestionHistory();
                 break;
-            case "all_users_test_history":
-                echo "UNFINISHED";
+            case "test_history":
+                exportTestHistory();
                 break;
             case "topics":
                 exportTopics();
@@ -59,10 +60,30 @@
         array_to_csv_download($user_question_history, $user_faculty_number. "_question_history.csv");
     }
 
+    function exportUserTestHistory($request) {
+        error_log(json_encode($request));
+        $user_faculty_number = $request["faculty_number"];
+
+        $query = "select * from test_history where user_id=$user_faculty_number";
+        error_log("query");
+        error_log($query);
+        $user_test_history = executeDBQuery($query);
+
+        array_to_csv_download($user_test_history, $user_faculty_number. "_question_history.csv");
+    }
+
     function exportQuestionHistory() {
         $question_history = executeDBQuery("select * from question_history");
 
         array_to_csv_download($question_history, "question_history.csv");
+    }
+
+    function exportTestHistory() {
+        $query = "select * from test_history";
+        error_log($query);
+        $test_history = executeDBQuery($query);
+
+        array_to_csv_download($test_history, "test_history.csv");
     }
 
     function exportTopics() {
