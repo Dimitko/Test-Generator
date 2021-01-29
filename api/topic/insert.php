@@ -7,12 +7,21 @@
 
     handleTopicInsert();
 
-    function handleTopicInsert() {
-        $request = parseRequest();
+    function handleTopicInsert(){
+        try {
+            $request = parseRequest();
 
-        $response = topicInsert($request);
+            $response = topicInsert($request);
 
-        echo json_encode($response);
+            echo json_encode($response);
+
+          } catch(Exception $e) {
+              $response = [
+                  "success" => "false",
+                  "msg" => "server encountered an error",
+              ];
+             echo json_encode($response);
+          }
     }
 
     function topicInsert($request) {

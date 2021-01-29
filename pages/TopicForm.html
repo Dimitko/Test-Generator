@@ -14,11 +14,31 @@
 
         <script type="text/javascript" src="/Test-Generator/scripts/navigation_bar.js" defer></script>
         <script type="text/javascript" src="/Test-Generator/scripts/login_utils.js" defer></script>
+        <script type="text/javascript" src="/Test-Generator/scripts/papaparse.js" defer></script>
         <script type="text/javascript" src="/Test-Generator/scripts/topic.js" defer></script>
     </head>
     <body class="bodyclass">
         <title>Добавяне на тема</title>
+
         <div class="form-style-2">
+            <h3>Добавяне чрез импортиране на CSV файл</h3>
+
+            <button id="topic-import" type="submit">import CSV</button>
+
+            <input type="file" id="file-upload" />
+
+            <!-- <input type="button" id="topic-import" value="import CSV" /> -->
+
+            <br>
+            <br>
+            <div id="response-container"></div>
+
+            <br />
+
+
+            <hr>
+            <h3> Добавяне на ръка </h3>
+
             <div class="form-style-2-heading">Добавяне на тема</div>
             <form id="topic-submit-form">
                 <label for="title"><span>Заглавие</span><span class="required">*</span>

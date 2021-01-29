@@ -92,7 +92,21 @@
     margin-left: 84%;
   }
 
+  #topic-import{
+    background-color: rgb(188, 188, 219);
+    color:rgb(73, 22, 139);
+    font-size: 12px;
+    border-radius: 12%;
+    margin-left: 84%;
+  }
+
   #question-import:hover{
+    cursor: pointer;
+    background-color:rgb(73, 22, 139); 
+    color:rgb(188, 188, 219);
+  }
+
+  #topic-import:hover{
     cursor: pointer;
     background-color:rgb(73, 22, 139); 
     color:rgb(188, 188, 219);
