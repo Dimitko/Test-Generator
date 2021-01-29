@@ -111,6 +111,14 @@
     background-color:rgb(73, 22, 139); 
     color:rgb(188, 188, 219);
   }
+  
+  #all_users_questions_label{
+    font-weight: bold;
+  }
+
+  #all_history_label{
+    font-weight: bold;
+  }
 
   @media screen and (max-width: 600px) {
     .column {
