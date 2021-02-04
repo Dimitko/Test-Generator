@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta name="author"/>
+        <meta name="description" content="Students Panel"/>
+        <meta charset="utf-8" />
+
+        <link href="../styles/PageStyling.css" rel="stylesheet"></link>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href = "../images/smile.jpg" rel="icon" type="image/jpg">
+
+        <link href="../styles/FormStyling.css" rel="stylesheet"></link>
+
+        <script type="text/javascript" src="/Test-Generator/scripts/navigation_bar.js" defer></script>
+        <script type="text/javascript" src="/Test-Generator/scripts/login_utils.js" defer></script>
+        <script type="text/javascript" src="/Test-Generator/scripts/students_panel.js" defer></script>
+
+        <title>Потребителски панел</title>
+
+    </head>
+    <body class="bodyclass">
+        <div class="form-style-2">
+            <div class="form-style-2-heading">Потребителски панел</div>
+            <form id="export-form">
+              <div>
+                <label for="user_question_history"><span>История с въпроси на потребител</span>
+                <input id="user_question_history" type="text" class="input-field" placeholder="Факултетен номер" /></label>
+                <br />
+                <br />
+                <input id="user_question_history_button" type="button" value="Download .CSV">
+                <hr>
+                <br>
+              </div>
+              <div>
+                <label for="user_test_history"><span>История с тестове на потребител</span>
+                <input id="user_test_history" type="text" class="input-field" placeholder="Факултетен номер" /></label>
+                <br />
+                <br />
+                <input id="user_test_history_button" type="button" value="Download .CSV">
+                <hr>
+                <br>
+              </div>
+              <div>
+                <label id="all_users_questions_label" for="question_history_button">История с въпроси за всички потребители</label>
+                <input id="question_history_button" type="button" value="Download .CSV">
+                <hr>
+                <br>
+              </div>
+              <div>
+                <label id="all_history_label" for="question_history_button">История с тестовете на всички потребители</label>
+                <input id="test_history_button" type="button" value="Download .CSV">
+                <hr>
+                <br>
+              </div>
+              <div>
+                <label for="topics"><span>Всички теми</span>
+                  <br />
+                  <br />
+                <input id="topics_button" type="button" value="Download .CSV">
+                <hr>
+                <br>
+              </div>
+              <div>
+                <label for="title"><span>Всички въпроси за дадена тема</span>
+                <label for="topic-select">
+                    <span>Тема</span>
+                    <span class="required"></span>
+                    <select id="topic-select" class="select-field"></select>
+                </label>
+                <input id="topic_questions_button" type="button" value="Download .CSV">
+                <hr>
+                <br>
+              </div>
+              <div>
+                <label for="users_button"><span>Всички потребители</span>
+                  <br />
+                  <br />
+                  <br />
+                <input id="users_button" type="button" value="Download .CSV">
+                <hr>
+                <br>
+              </div>
+          </form>
+        </div>
+    </body>
+</html>

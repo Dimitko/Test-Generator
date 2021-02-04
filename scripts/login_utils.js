@@ -44,6 +44,8 @@ function updateNavBarLoggedIn(user_faculty_number, user_topic_number) {
 
   if (user_faculty_number == 0) {
     updateNavBarAdminPanel();
+  } else {
+    updateNavBarStudentsPanel();
   }
 
 
@@ -51,12 +53,22 @@ function updateNavBarLoggedIn(user_faculty_number, user_topic_number) {
 
 }
 
+function updateNavBarStudentsPanel() {
+  navbar_conditions = document.getElementById("conditions-link");
+  students_panel_link = document.createElement("a");
+  students_panel_link.href = "http://localhost/Test-Generator/pages/Students_Panel.html";
+  navbar_conditions.parentNode.insertBefore(students_panel_link, navbar_conditions.nextSibling);
+  const panel_HTML = `<i class="fa fa-paw" aria-hidden="true"></i> Потребителски панел`;
+  navbar_conditions.innerHTML = panel_HTML; 
+}
+
 function updateNavBarAdminPanel() {
   navbar_conditions = document.getElementById("conditions-link");
   admin_panel_link = document.createElement("a");
   admin_panel_link.href = "http://localhost/Test-Generator/pages/AdminPanel.html";
-  admin_panel_link.innerText = 'Администраторски панел';
   navbar_conditions.parentNode.insertBefore(admin_panel_link, navbar_conditions.nextSibling);
+  const panel_HTML = `<i class="fa fa-beer " aria-hidden="true"></i> Администраторски панел`;
+  navbar_conditions.innerHTML = panel_HTML; 
 }
 
 function redirectToLogin() {
