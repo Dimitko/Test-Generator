@@ -55,11 +55,18 @@ function updateNavBarLoggedIn(user_faculty_number, user_topic_number) {
 
 function updateNavBarStudentsPanel() {
   navbar_conditions = document.getElementById("conditions-link");
-  students_panel_link = document.createElement("a");
-  students_panel_link.href = "http://localhost/Test-Generator/pages/Students_Panel.html";
+  students_panel_link = document.createElement("div");
+  students_panel_link.className = "dropdown";
+  students_panel_link.id = "students-panel";
   navbar_conditions.parentNode.insertBefore(students_panel_link, navbar_conditions.nextSibling);
-  const panel_HTML = `<i class="fa fa-paw" aria-hidden="true"></i> Потребителски панел`;
-  navbar_conditions.innerHTML = panel_HTML; 
+  const panel_HTML = `<button class="dropbtn"><i class="fa fa-paw" aria-hidden="true"></i> Потребителски панел
+                      <i class="fa fa-caret-down"></i>
+                      </button>
+                      <div class="dropdown-content">
+                      <a href="http://localhost/Test-Generator/pages/Students_Panel.html"><i class="fa fa-paw" aria-hidden="true"></i> Моите въпроси</a>
+                      <a href="http://localhost/Test-Generator/pages/Students_Panel.html"><i class="fa fa-paw" aria-hidden="true"></i> Моите тестове</a>
+                      </div>`;
+  students_panel_link.innerHTML = panel_HTML; 
 }
 
 function updateNavBarAdminPanel() {
@@ -68,7 +75,7 @@ function updateNavBarAdminPanel() {
   admin_panel_link.href = "http://localhost/Test-Generator/pages/AdminPanel.html";
   navbar_conditions.parentNode.insertBefore(admin_panel_link, navbar_conditions.nextSibling);
   const panel_HTML = `<i class="fa fa-beer " aria-hidden="true"></i> Администраторски панел`;
-  navbar_conditions.innerHTML = panel_HTML; 
+  admin_panel_link.innerHTML = panel_HTML; 
 }
 
 function redirectToLogin() {
