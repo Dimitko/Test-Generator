@@ -120,6 +120,26 @@
     font-weight: bold;
   }
 
+  #show-questions{
+    float: right;
+  }
+
+  #show-question{
+    float: right;
+  }
+
+  #question-change{
+    float: right;
+  }
+
+  #question-remove{
+    background-color: red;
+  }
+
+  /* #question-remove-change{
+    visibility: hidden;
+  } */
+
   @media screen and (max-width: 600px) {
     .column {
       width: 100%;

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta name="author"/>
+        <meta name="description" content="Students Panel"/>
+        <meta charset="utf-8" />
+
+        <link href="../styles/PageStyling.css" rel="stylesheet"></link>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href = "../images/smile.jpg" rel="icon" type="image/jpg">
+
+        <link href="../styles/FormStyling.css" rel="stylesheet"></link>
+
+        <script type="text/javascript" src="/Test-Generator/scripts/navigation_bar.js" defer></script>
+        <script type="text/javascript" src="/Test-Generator/scripts/login_utils.js" defer></script>
+        <script type="text/javascript" src="/Test-Generator/scripts/students_questions_panel.js" defer></script>
+
+        <title>Потребителски панел</title>
+
+    </head>
+    <body class="bodyclass">
+        <div class="form-style-2">
+            <div class="form-style-2-heading">Моите добавени въпроси</div>
+            <form id="export-form">
+
+                <label for="title"><span>Всички въпроси за дадена тема</span>
+                <label for="topic-select">
+                    <span>Тема</span>
+                    <span class="required"></span>
+                    <select id="topic-select" class="select-field"></select>
+                </label>
+                <input id="topic_questions_button" type="button" value="Download .CSV">
+                <input id="show-questions" type="button" value="Покажи въпросите"> 
+                <hr>
+                <br>
+          </form>
+        </div>
+          <div class="form-style-2">
+            <label for="question-select">
+              <span>Въпрос</span>
+              <span class="required"></span>
+              <select id="question-select" class="select-field"></select>
+              <br />
+              <br />
+              <input id="show-question" type="button" value="Избери"> 
+              <br />
+              <br />
+              <hr>
+            </label>
+          </div>
+
+          <div class="form-style-2" id="question-remove-change">
+            <div class="form-style-2-heading">Редактиране/премахване на въпрос</div>
+            <form id="student-question-form">
+
+              <label for="aim"><span>Цел на въпроса</span><span class="required">*</span>
+              <input id="aim" name="aim" type="text" class="input-field"/></label>
+
+              <br />
+
+              <label for="type"><span>Тип на въпроса</span><span class="required">*</span>
+              <select id="type" name="type" class="select-field">
+                  <option value=1>За предварителни знания (pre-question)</option>
+                  <option value=2>По време на презентацията (poll question)</option>
+                  <option value=3>След презентацията (test your knowledge)</option>
+              </select>
+              </label>
+
+              <br />
+
+              <div id="difficulty-container">
+                  <label for="difficulty"><span>Ниво на трудност</span><span class="required">*</span>
+                  <p id="difficulty-number"></p>
+                  <input id="difficulty" type="range" class="input-field" placeholder="Число от 1 до 10" name="difficulty" min="1" max="10">
+
+              </div>
+
+
+              <br />
+              <br />
+
+              <label for="question_text"><span>Съдържание</span><span class="required">*</span>
+              <textarea id="question_text" name="question_text" class="textarea-field"></textarea></label>
+
+              <br />
+              <br />
+
+              <label for="option_1"><span>Опция 1</span><span class="required">*</span>
+              <textarea id="option_1" name="option_1" class="textarea-field"></textarea></label>
+
+              <br />
+              <br />
+
+              <label for="option_2"><span>Опция 2</span><span class="required">*</span>
+              <textarea id="option_2" name="option_2" class="textarea-field"></textarea></label>
+
+              <br />
+              <br />
+
+              <label for="option_3"><span>Опция 3</span><span class="required">*</span>
+              <textarea id="option_3" name="option_3" class="textarea-field"></textarea></label>
+
+              <br />
+              <br />
+
+              <label for="option_4"><span>Опция 4</span><span class="required">*</span>
+              <textarea id="option_4" name="option_4" class="textarea-field"></textarea></label>
+
+              <br />
+              <br />
+
+              <label for="answer">
+              <span>Верен отговор</span>
+              <span class="required"></span>
+              <select id="answer" name="answer" class="select-field">
+                  <option value="1">Опция 1</option>
+                  <option value="2">Опция 2</option>
+                  <option value="3">Опция 3</option>
+                  <option value="4">Опция 4</option>
+              </select>
+              </label>
+
+              <label for="feedback_correct"><span>Обратна връзка при верен отговор</span><span class="required">*</span>
+              <input id="feedback_correct" name="feedback_correct" type="text" class="input-field" placeholder="Отлично! Повече по темата в секция 4.3.
+              "/></label>
+
+              <br />
+
+              <label for="feedback_incorrect"><span>Обратна връзка при грешен отговор</span><span class="required">*</span>
+              <input id="feedback_incorrect" name="feedback_incorrect" type="text" class="input-field" placeholder="Не е така! Повече по темата в секция 4.3.
+              "/></label>
+
+              <br />
+              <br />
+
+              <label for="notes"><span>Забележки</span><span></span>
+              <textarea id="notes" name="notes" class="textarea-field" placeholder="Линкове към източници, препратки, особености на въпроса" ></textarea></label>
+
+              <br />
+              <input id="question-remove" type="submit" value="Изтрий въпроса" ></input>
+              <input id="question-change" type="submit" value="Запиши промените по въпроса" ></input>
+
+              <div id="question-submit-response"></div>
+          </form>
+        </div>
+
+        </div>
+    </body>
+</html>

@@ -37,7 +37,9 @@ function logout() {
 
 function updateNavBarLoggedIn(user_faculty_number, user_topic_number) {
   navbar_login = document.getElementById("navbar-login");
-  navbar_login.innerText = "Изход"
+  const navbar_logout_HTML = `<i class="fa fa-sign-out " aria-hidden="true"></i> Изход`;
+  navbar_login.innerHTML = navbar_logout_HTML; 
+  // navbar_login.innerText = "Изход"
   navbar_login.addEventListener('click', logout)
 
   document.getElementById("register-menu").hidden = true;
@@ -63,8 +65,8 @@ function updateNavBarStudentsPanel() {
                       <i class="fa fa-caret-down"></i>
                       </button>
                       <div class="dropdown-content">
-                      <a href="http://localhost/Test-Generator/pages/Students_Panel.html"><i class="fa fa-paw" aria-hidden="true"></i> Моите въпроси</a>
-                      <a href="http://localhost/Test-Generator/pages/Students_Panel.html"><i class="fa fa-paw" aria-hidden="true"></i> Моите тестове</a>
+                      <a href="http://localhost/Test-Generator/pages/Student_Questions_Panel.html"><i class="fa fa-folder-open" aria-hidden="true"></i> Моите добавени въпроси</a>
+                      <a href="http://localhost/Test-Generator/pages/Student_Tests_Panel.html"><i class="fa fa-file-text" aria-hidden="true"></i> Моите направени тестове</a>
                       </div>`;
   students_panel_link.innerHTML = panel_HTML; 
 }

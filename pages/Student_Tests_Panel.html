@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta name="author"/>
+        <meta name="description" content="Students Panel"/>
+        <meta charset="utf-8" />
+
+        <link href="../styles/PageStyling.css" rel="stylesheet"></link>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href = "../images/smile.jpg" rel="icon" type="image/jpg">
+
+        <link href="../styles/FormStyling.css" rel="stylesheet"></link>
+
+        <script type="text/javascript" src="/Test-Generator/scripts/navigation_bar.js" defer></script>
+        <script type="text/javascript" src="/Test-Generator/scripts/login_utils.js" defer></script>
+        <script type="text/javascript" src="/Test-Generator/scripts/students_tests_panel.js" defer></script>
+
+        <title>Потребителски панел</title>
+
+    </head>
+    <body class="bodyclass">
+        <div class="form-style-2">
+            <div class="form-style-2-heading">Моите направени тестове</div>
+            <form id="export-form">
+                <label for="user_test_history"><span>История с тестове на потребител</span>
+                <input id="user_test_history" type="text" class="input-field" placeholder="Факултетен номер" /></label>
+                <br />
+                <br />
+                <input id="user_test_history_button" type="button" value="Download .CSV">
+                <hr>
+                <br>
+              </div>
+          </form>
+        </div>
+    </body>
+</html>
