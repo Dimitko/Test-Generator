@@ -147,7 +147,7 @@ function getStudentTopic(user_topic_number) {
   }
 
   function showQuestion(question) {
-      console.log(question[0]);
+      // console.log(question[0]);
       document.getElementById('aim').value = question[0]['aim'];
       document.getElementById('question_text').value = question[0]['question_text'];
       document.getElementById('option_1').value = question[0]['option_1'];
@@ -160,6 +160,43 @@ function getStudentTopic(user_topic_number) {
       document.getElementById('feedback_incorrect').value = question[0]['feedback_incorrect'];
       document.getElementById('notes').value = question[0]['notes'];
       document.getElementById('type').value = question[0]['type'];
+  }
+
+  const removeQuestion = e => {
+    e.preventDefault();
+
+    question_id = document.getElementById("question-select").value;
+
+    fetch('http://localhost/Test-Generator/api/question/delete.php/byId', {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({"question_id": question_id})
+      }).then(
+      response => response.json()
+      ).then(
+        response => handleQuestionRemoveResponse(response)
+      )  
+  }
+
+  function handleQuestionRemoveResponse(response) {
+    color = "green";
+
+    selected_question = document.getElementById("question-select");
+
+    question_info = selected_question.options[selected_question.selectedIndex].text;
+
+    message = "Успешно изтрихте въпрос " + question_info + " !";
+
+    question_remove_response = document.getElementById("question-remove-change-response");
+
+    if (!response) {
+      message = "Възникна грешка!";
+      color = "red";
+    }
+    question_remove_response.innerHTML = '<h2>' + message + '</h2>';
+    question_remove_response.style = "font-size:15px;color:" + color;
   }
 
   function listTopics(response) {
@@ -199,4 +236,6 @@ function getStudentTopic(user_topic_number) {
   });
 
   document.getElementById('show-question').addEventListener('click', getQuestion);
+
+  document.getElementById('question-remove').addEventListener('click', removeQuestion);
   })();
