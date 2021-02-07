@@ -199,6 +199,72 @@ function getStudentTopic(user_topic_number) {
     question_remove_response.style = "font-size:15px;color:" + color;
   }
 
+  const changeQuestion = e => {
+    e.preventDefault();
+
+    question_id = document.getElementById("question-select").value;
+
+    aim = document.getElementById('aim').value;
+    question_text = document.getElementById('question_text').value;
+    option_1 = document.getElementById('option_1').value;
+    option_2 = document.getElementById('option_2').value;
+    option_3 = document.getElementById('option_3').value;
+    option_4 = document.getElementById('option_4').value;
+    answer = document.getElementById('answer').value;
+    difficulty = document.getElementById('difficulty').value;
+    feedback_correct = document.getElementById('feedback_correct').value;
+    feedback_incorrect = document.getElementById('feedback_incorrect').value;
+    notes = document.getElementById('notes').value;
+    type = document.getElementById('type').value;
+
+    const question_data = {
+      question_id,
+      aim,
+      question_text,
+      option_1,
+      option_2,
+      option_3,
+      option_4,
+      answer,
+      difficulty,
+      feedback_correct,
+      feedback_incorrect,
+      notes,
+      type
+    }
+
+    fetch('http://localhost/Test-Generator/api/question/change.php/byId', {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(question_data)
+      }).then(
+      response => response.json()
+      ).then(
+        response => handleQuestionChangeResponse(response)
+      )  
+  }
+
+  function handleQuestionChangeResponse(response) {
+    color = "green";
+
+    selected_question = document.getElementById("question-select");
+
+    question_info = selected_question.options[selected_question.selectedIndex].text;
+
+    message = "Успешно променихте въпрос " + question_info + " !";
+
+    question_change_response = document.getElementById("question-remove-change-response");
+
+    if (!response.success) {
+      message = "Възникна грешка!";
+      color = "red";
+    }
+    question_change_response.innerHTML = '<h2>' + message + '</h2>';
+    question_change_response.style = "font-size:15px;color:" + color;
+  }
+
   function listTopics(response) {
     response.forEach(topic => {
         let options = document.createElement('option');
@@ -238,4 +304,5 @@ function getStudentTopic(user_topic_number) {
   document.getElementById('show-question').addEventListener('click', getQuestion);
 
   document.getElementById('question-remove').addEventListener('click', removeQuestion);
+  document.getElementById('question-change').addEventListener('click', changeQuestion);
   })();
