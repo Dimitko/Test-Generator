@@ -11,6 +11,7 @@
         <link href = "../images/smile.jpg" rel="icon" type="image/jpg">
 
         <link href="../styles/FormStyling.css" rel="stylesheet"></link>
+        <link href="../styles/TableStyling.css" rel="stylesheet"></link>
 
         <script type="text/javascript" src="/Test-Generator/scripts/navigation_bar.js" defer></script>
         <script type="text/javascript" src="/Test-Generator/scripts/login_utils.js" defer></script>
@@ -23,15 +24,30 @@
         <div class="form-style-2">
             <div class="form-style-2-heading">Моите направени тестове</div>
             <form id="export-form">
-                <label for="user_test_history"><span>История с тестове на потребител</span>
-                <input id="user_test_history" type="text" class="input-field" placeholder="Факултетен номер" /></label>
+                <label for="user-test-history"><span>История с тестове на потребител с фак. номер</span>
+                <br />
+                <!-- <input id="user-test-history" type="text" class="input-field" placeholder="Факултетен номер" /></label> -->
+                <select id="user-test-history" class="select-field"></select>
                 <br />
                 <br />
-                <input id="user_test_history_button" type="button" value="Download .CSV">
+                <br />
+                <input id="user-test-history-button" type="button" value="Download .CSV">
                 <hr>
-                <br>
-              </div>
+                <input id="show-user-tests" type="button" value="Покажи моите тестове">
+                <br />
+                <br />
+                <div id="show-tests"></div>
           </form>
+          <table id="user-tests-table" class="styled_table">
+            <!-- <thead>
+                <tr>
+                    <th id="thead1">Време</th>
+                    <th id="thead2">Резултат</th>
+                </tr>
+            </thead> -->
+            <tbody id="table-body">
+            </tbody>
+        </table>
         </div>
     </body>
 </html>
