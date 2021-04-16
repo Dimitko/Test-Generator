@@ -146,6 +146,70 @@ function getStudentTopic(user_topic_number) {
     question_form_element.hidden = false;
   }
 
+  function showQuestionStatistics(question) {
+    // console.log('Now printing question id: ');
+    // console.log(question[0]['id']);
+
+    fetch('http://localhost/Test-Generator/api/history/statistics.php', {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({"question_id": question[0]['id']})
+      }).then(
+      response => response.json()
+      ).then(
+        response => handleShowStatisticsResponse(response)
+      )
+  }
+
+  function handleShowStatisticsResponse(statistics) {
+    // console.log(statistics);
+
+    option_1 = statistics['option_1'].toFixed(2);
+    option_2 = statistics['option_2'].toFixed(2);
+    option_3 = statistics['option_3'].toFixed(2);
+    option_4 = statistics['option_4'].toFixed(2);
+
+    times_answ_norm = statistics['times_answered'].toFixed(2);
+    correct_times_answ_norm = statistics['correct_times_answered'].toFixed(2);
+
+    if (times_answ_norm != 0) {
+      option_1_norm = (option_1 / times_answ_norm);
+      option_2_norm = (option_2 / times_answ_norm);
+      option_3_norm = (option_3 / times_answ_norm);
+      option_4_norm = (option_4 / times_answ_norm);
+  
+      rightAnswers = (correct_times_answ_norm / times_answ_norm) * 100;
+  
+      document.getElementById('times-answered').innerHTML += statistics['times_answered'];
+      document.getElementById('correct-times-answered').innerHTML += statistics['correct_times_answered'] + ', ' + rightAnswers + '%';
+  
+      incorrectTimesAnswered = times_answ_norm - correct_times_answ_norm;
+  
+      document.getElementById('incorrect-times-answered').innerHTML += incorrectTimesAnswered;
+  
+      document.getElementById('option1-times-answered').innerHTML += statistics['option_1']
+       + ', ' + option_1_norm * 100 + '%';
+      document.getElementById('option2-times-answered').innerHTML += statistics['option_2']
+      + ', ' + option_2_norm * 100 + '%';
+      document.getElementById('option3-times-answered').innerHTML += statistics['option_3']
+      + ', ' + option_3_norm * 100 + '%';
+      document.getElementById('option4-times-answered').innerHTML += statistics['option_4']
+      + ', ' + option_4_norm * 100 + '%';
+    } else {
+      // console.log('Here!');
+      document.getElementById('times-answered').innerHTML += statistics['times_answered'];
+      document.getElementById('correct-times-answered').hidden = true;
+      document.getElementById('incorrect-times-answered').hidden = true;
+      document.getElementById('option1-times-answered').hidden = true;
+      document.getElementById('option2-times-answered').hidden = true;
+      document.getElementById('option3-times-answered').hidden = true;
+      document.getElementById('option4-times-answered').hidden = true;
+    }
+
+  }
+
   function showQuestion(question) {
       // console.log(question[0]);
       document.getElementById('aim').value = question[0]['aim'];
@@ -160,6 +224,8 @@ function getStudentTopic(user_topic_number) {
       document.getElementById('feedback_incorrect').value = question[0]['feedback_incorrect'];
       document.getElementById('notes').value = question[0]['notes'];
       document.getElementById('type').value = question[0]['type'];
+
+      showQuestionStatistics(question);
   }
 
   const removeQuestion = e => {

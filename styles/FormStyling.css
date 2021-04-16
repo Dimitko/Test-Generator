@@ -83,3 +83,24 @@
 	cursor: pointer;
 }
 
+#times-answered{
+	font-size: large;
+	color: blue;
+}
+
+#correct-times-answered{
+	font-size: large;
+	color: green;
+}
+
+#incorrect-times-answered{
+	font-size: large;
+	color: red;
+}
+
+#option1-times-answered, #option2-times-answered, #option3-times-answered, #option4-times-answered{
+	font-size: small;
+	color: rgb(64, 34, 119);
+}
+
+
